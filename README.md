@@ -1,2 +1,2 @@
-# Course-Projects
-Course Projects in SU
+# Internet Programming
+Course Project of IP
