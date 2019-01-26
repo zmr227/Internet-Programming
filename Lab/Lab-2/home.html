@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Home</title>
+  <script src="Lab2.js"></script>
+  <link rel="stylesheet" href="Lab2.css">
+  <link rel="stylesheet" href="home.css">
+  
+</head>
+
+<body onload="setTheme()">
+  <div class="lighttheme"></div>
+  <header>
+    <h2>&nbsp;CSE686 - Internet Programming</h2>
+    <h3>&nbsp;&nbsp;Minrui Zhang</h3>
+  </header>
+  
+  <div id="theme-boxes" class="wrap">
+    
+    <input type="checkbox" id="light-theme" class="checkbox" onclick="checkTheme(this)">
+    <label for="light-theme" class="checkbox-label">Light Theme</label>
+ 
+    <input type="checkbox" id="dark-theme" class="checkbox" onclick="checkTheme(this)">
+    <label for="dark-theme" class="checkbox-label">Dark Theme</label>
+  
+    <input type="checkbox" id="page-theme" class="checkBox" onclick="checkTheme(this)">
+    <label for="page-theme" class="checkbox-label">Page Theme</label>
+  </div>
+  
+
+</div>
+ <div class="row">
+  <div class="column left" style="background-color:#ccc;">
+   <nav>
+    <ul class="home-nav">
+      <b>
+        <li><a href="site-map.html">Site Map</a></li>
+        <li><a href="Lab2.html">Lab 2</a></li>
+        <li><a href="">Lab 3</a></li>
+        <li><a href="">Lab 4</a></li>
+        <li><a href="">Lab 5</a></li>
+        <li><a href="">Lab 6</a></li>
+      </b>
+    </ul>
+    </nav>
+  </div>
+  <div class="middle column" style="background-color:#abb; text-align: center;">
+    <br><h2>Middle Column</h2>
+    <p>Some text..</p>
+    </div>
+  <div class="right column" style="background-color:#bbc; text-align: center">
+    <br><h2>Right Column</h2>
+    <p>Some text..</p>
+    </div>
+ </div>
+
+  <footer class="">
+    <p> copyright © Minrui Zhang&nbsp;&nbsp;&nbsp;Date: 2019-01-25</p>
+  </footer>
+  
+</body>
+</html>

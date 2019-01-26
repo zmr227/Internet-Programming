@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Lab #2</title>
+  <script src="Lab2.js"></script>
+  <link rel="stylesheet" href="Lab2.css">
+</head>
+
+<body onload="setTheme()">
+  <div class="darktheme"></div>
+  <h2>&nbsp;Lab #2</h2>
+
+  <div id="theme-boxes" class="wrap">
+    
+    <input type="checkbox" id="light-theme" class="checkbox" onclick="checkTheme(this)">
+    <label for="light-theme" class="checkbox-label">Light Theme</label>
+ 
+    <input type="checkbox" id="dark-theme" class="checkbox" onclick="checkTheme(this)">
+    <label for="dark-theme" class="checkbox-label">Dark Theme</label>
+  
+    <input type="checkbox" id="page-theme" class="checkBox" onclick="checkTheme(this)">
+    <label for="page-theme" class="checkbox-label">Page Theme</label>
+  </div>
+  
+  <div style="background-color: #ccc">
+    <br><details id="lab-description">
+      <summary style="font-size: 18px;"><mark>Description of Lab #2</mark></summary>
+      <p>
+        1. Create an HTML5 <b>home page</b> that displays the course title, my name, and date (in the footer), also, provide links to a Lab #2 page and a site map page in the left column.<br>
+        2. Create a Lab #2 page that uses <b>footer</b>, <b>details</b> and <b>mark</b> tags, which are new features to HTML5, with a Lab #2 header and a brief description of the lab.<br>
+        3. Create a <b>site map</b> page that has two links: one to home page and one to the Lab #2 page.<br>
+        4. Create a <b>CSS style sheet</b> and add links to it on each of the html pages. Added styles that make the site look reasonably professional.<br>
+        5. Add a <b>JavaScript file</b> to apply a theme to each page that contains an html div element with a class whose name is either lighttheme or darktheme. Call this function from the body load event.<br>
+        6. Add <b>lighttheme and darktheme styles</b> that each set the CSS style properties: background-color and color.<br>
+        7. On the home page add lighttheme div, on the Lab #2 and site map pages add darktheme div.<br>
+        8. At the top of every page, add three <b>check boxes</b> for light theme, dark theme, page theme. <br>
+        &nbsp;&nbsp;&nbsp; a) The first two will be used to change the theme, ignoring the divs with theme classes. So all pages will have the same theme. <br>
+        &nbsp;&nbsp;&nbsp; b) By default, each page will have its own theme and the "Page Theme" checkbox will be selected if none of the first two is checked.<br>
+        &nbsp;&nbsp;&nbsp; c) Save the state of these buttons in local storage, and retrieve from local storage on page load. <br>
+        &nbsp;&nbsp;&nbsp; d) If select "Page Theme" on the page, you will need to <b>refresh the page manually</b> to see the changes.
+      </p> 
+  </details>
+  </div>
+  
+  <div style="margin: 25px 25px"></div>
+
+  <div> 
+    <footer class="">
+      <p> copyright © Minrui Zhang&nbsp;&nbsp;&nbsp;Date: 2019-01-25</p>
+    </footer>
+ </div>
+  
+
+</body>
+</html>
