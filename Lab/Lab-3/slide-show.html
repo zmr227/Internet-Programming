@@ -19,32 +19,32 @@
             display: none;
         }
         
-        img {
-            position: relative;
-            float: left;
+        
+        iframe, img {
             width: 800px;
-            height:450px;
-            background-position: 50% 50%;
-            background-repeat:   no-repeat;
-            background-size:     cover;
-        }
+            height: 460px;
+            float: left;
+            margin-top: 20px;
+            position: relative;
+            -moz-border-radius: 12px;
+            -webkit-border-radius: 12px;
+            border-radius: 12px;
+            -moz-box-shadow: 4px 4px 14px #000;
+            -webkit-box-shadow: 4px 4px 14px #000;
+            box-shadow: 4px 4px 14px #000;
+           
+        } 
+
         .slideNum {
             position: absolute;
             right: 5px;
-            padding: 12px 20px;
+            padding: 35px 20px;
             color: beige;
-        }
-        .slideText {
-            width: 100%;
-            top: 460px;
-            text-align: center;
-            font-size: larger;
-            position: absolute;
         }
 
         .prevSlide, .nextSlide {
            position: absolute;
-           top: 210px;
+           top: 220px;
            color: beige;
            font-weight: bold;
            padding: 10px;
@@ -71,45 +71,95 @@
             padding: 3px;
             margin: 20px 3px;
             border-radius: 50%;
+            cursor: pointer;
         }
-
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @keyframes fade {
+            from{opacity: 0.3;}
+            to{opacity: 1;}
+        }
+        .active, .dots:hover {
+            background: #333;
+        }
     </style>
 
     <body>
             
       <div class="slideShow">
-        <div  class="slides" style="display: block;">
+        <div  class="slides fade">
+            <div><iframe src="https://www.wikipedia.org/"></iframe></div>
+        </div>
+
+        <div  class="slides fade">
             <div><img src="images/1.jpg"></div>
             <div class="slideNum">1 / 4</div>
         </div>
-        <div  class="slides">
+        <div  class="slides fade">
             <div><img src="images/2.jpg"></div>
             <div class="slideNum">2 / 4</div>
-            <div class="slideText">Picture 2</div>
         </div>
-        <div  class="slides">
+        <div  class="slides fade">
             <div><img src="images/3.jpg"></div>
             <div class="slideNum">3 / 4</div>
-            <div class="slideText">Picture 3</div>
         </div>
-        <div  class="slides">
+        <div  class="slides fade">
             <div><img src="images/4.jpg"></div>
             <div class="slideNum">4 / 4</div>
-            <div class="slideText">Picture 4</div>
         </div>
+        
 
-        <a class="prevSlide">&#10094;</a>
-        <a class="nextSlide">&#10095;</a>
+        <a class="prevSlide" onclick="switchSlide(-1)">&#10094;</a>
+        <a class="nextSlide" onclick="switchSlide(1)">&#10095;</a>
     
         <div style="text-align: center;">
-            <span class="dots"></span>
-            <span class="dots"></span>
-            <span class="dots"></span>
-            <span class="dots"></span>
+            <span class="dots" onclick="curSlide(1)"></span>
+            <span class="dots" onclick="curSlide(2)"></span>
+            <span class="dots" onclick="curSlide(3)"></span>
+            <span class="dots" onclick="curSlide(4)"></span>
+            <span class="dots" onclick="curSlide(5)"></span>
         </div>
 
      </div>
 
-      <script type="text/javascript"></script>
+      <script type="text/javascript">
+        var slideIndex = 1;
+        showSlide(slideIndex);
+
+        function switchSlide(n){
+            showSlide(slideIndex += n);
+        }
+
+        function curSlide(n){
+            showSlide(slideIndex = n)
+        }
+
+        function showSlide(idx){
+            var slide = document.getElementsByClassName('slides');
+            var dots = document.getElementsByClassName("dots");
+
+            if (idx > slide.length){
+                slideIndex = 1;
+            }
+            if (idx < 1){
+                slideIndex = slide.length;
+            }
+
+            // show current slide and hide the others
+            for (var i = 0; i < slide.length; i++){
+                slide[i].style.display = "none";
+            }
+            slide[slideIndex-1].style.display = "block";
+
+            // activate selected dots and inactivate the others
+            for (var i = 0; i < dots.length; i++){
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            dots[slideIndex-1].className += " active";
+        }
+
+      </script>
     </body>
 </html>
