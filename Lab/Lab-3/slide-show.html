@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Slide Show</title>
+    </head>
+    <link rel="stylesheet" href="" type="text/css">
+    <style type="text/css">
+        body {
+            margin: 0;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .slideShow {
+            width: 800px;
+            position: relative;
+            margin: auto;
+        }
+        .slides {
+            display: none;
+        }
+        
+        img {
+            position: relative;
+            float: left;
+            width: 800px;
+            height:450px;
+            background-position: 50% 50%;
+            background-repeat:   no-repeat;
+            background-size:     cover;
+        }
+        .slideNum {
+            position: absolute;
+            right: 5px;
+            padding: 12px 20px;
+            color: beige;
+        }
+        .slideText {
+            width: 100%;
+            top: 460px;
+            text-align: center;
+            font-size: larger;
+            position: absolute;
+        }
+
+        .prevSlide, .nextSlide {
+           position: absolute;
+           top: 210px;
+           color: beige;
+           font-weight: bold;
+           padding: 10px;
+           font-size: xx-large;
+        }
+        .prevSlide:hover, .nextSlide:hover {
+            background: #333;
+            cursor: pointer;
+        }
+        .nextSlide {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prevSlide {
+            left: 0;
+            border-radius: 0 3px 3px 0;
+        }
+        .dots {
+            float:none;
+            width: 10px;
+            height: 10px;
+            display: inline-block;
+            background: gray;
+            padding: 3px;
+            margin: 20px 3px;
+            border-radius: 50%;
+        }
+
+    </style>
+
+    <body>
+            
+      <div class="slideShow">
+        <div  class="slides" style="display: block;">
+            <div><img src="images/1.jpg"></div>
+            <div class="slideNum">1 / 4</div>
+        </div>
+        <div  class="slides">
+            <div><img src="images/2.jpg"></div>
+            <div class="slideNum">2 / 4</div>
+            <div class="slideText">Picture 2</div>
+        </div>
+        <div  class="slides">
+            <div><img src="images/3.jpg"></div>
+            <div class="slideNum">3 / 4</div>
+            <div class="slideText">Picture 3</div>
+        </div>
+        <div  class="slides">
+            <div><img src="images/4.jpg"></div>
+            <div class="slideNum">4 / 4</div>
+            <div class="slideText">Picture 4</div>
+        </div>
+
+        <a class="prevSlide">&#10094;</a>
+        <a class="nextSlide">&#10095;</a>
+    
+        <div style="text-align: center;">
+            <span class="dots"></span>
+            <span class="dots"></span>
+            <span class="dots"></span>
+            <span class="dots"></span>
+        </div>
+
+     </div>
+
+      <script type="text/javascript"></script>
+    </body>
+</html>
