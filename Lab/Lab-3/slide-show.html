@@ -7,8 +7,17 @@
     <link rel="stylesheet" href="" type="text/css">
     <style type="text/css">
         body {
-            margin: 0;
+            background: beige;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .flexbox, container {
+            display: flex;
+            flex-flow:wrap;
+        }
+        h2, h3 {
+            font-family: Tahoma, sans-serif;
+            color: maroon;
+            margin: 3% 5% 2% 5%;
         }
         .slideShow {
             width: 800px;
@@ -18,7 +27,6 @@
         .slides {
             display: none;
         }
-        
         
         iframe, img {
             width: 800px;
@@ -32,7 +40,6 @@
             -moz-box-shadow: 4px 4px 14px #000;
             -webkit-box-shadow: 4px 4px 14px #000;
             box-shadow: 4px 4px 14px #000;
-           
         } 
 
         .slideNum {
@@ -84,11 +91,19 @@
         .active, .dots:hover {
             background: #333;
         }
+        .text {
+            padding: 5px;
+            margin: auto;
+        }
     </style>
 
     <body>
-            
-      <div class="slideShow">
+        
+        <h2>&nbsp;Lab #3 - CSS Styling Lab</h2>
+        <h3 style="margin: 0 5%;">&nbsp;&nbsp;Minrui Zhang</h3>
+      <div class="flexbox" >
+          
+        <div class="slideShow" >
         <div  class="slides fade">
             <div><iframe src="https://www.wikipedia.org/"></iframe></div>
         </div>
@@ -110,7 +125,7 @@
             <div class="slideNum">4 / 4</div>
         </div>
         
-
+        
         <a class="prevSlide" onclick="switchSlide(-1)">&#10094;</a>
         <a class="nextSlide" onclick="switchSlide(1)">&#10095;</a>
     
@@ -121,9 +136,17 @@
             <span class="dots" onclick="curSlide(4)"></span>
             <span class="dots" onclick="curSlide(5)"></span>
         </div>
-
+        
+            
      </div>
-
+     <div class="text">
+            <p>Build a slide show component that you will use in your pages:</p>
+            <p>Use CSS to build an image slide show using CSS and as little JavaScript as possible.</p>
+            <p>Use CSS to build an image slide show using CSS and as little JavaScript as possible.</p>
+            <p>Use CSS to build an image slide show using CSS and as little JavaScript as possible.</p>
+            
+            </div>
+    </div>
       <script type="text/javascript">
         var slideIndex = 1;
         showSlide(slideIndex);
