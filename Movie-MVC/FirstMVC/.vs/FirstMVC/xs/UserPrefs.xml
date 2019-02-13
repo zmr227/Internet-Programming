@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{365BE12E-37AE-420E-BB10-1D27063FBE75}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FirstMVC/Views/Random.cshtml">
+    <Files>
+      <File FileName="FirstMVC/Controllers/MoviesController.cs" Line="20" Column="6" />
+      <File FileName="FirstMVC/Models/Movie.cs" Line="10" Column="6" />
+      <File FileName="FirstMVC/Views/Random.cshtml" Line="9" Column="20" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.FirstMVC PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
