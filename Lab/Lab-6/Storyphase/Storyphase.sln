@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storyphase", "Storyphase.csproj", "{3EAD0FB1-16E5-468E-A7B6-C8D0636C6CAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EAD0FB1-16E5-468E-A7B6-C8D0636C6CAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EAD0FB1-16E5-468E-A7B6-C8D0636C6CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EAD0FB1-16E5-468E-A7B6-C8D0636C6CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EAD0FB1-16E5-468E-A7B6-C8D0636C6CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,42 @@
+﻿<Properties StartupConfiguration="{3EAD0FB1-16E5-468E-A7B6-C8D0636C6CAA}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
+    <Files>
+      <File FileName="Models/Story.cs" Line="14" Column="42" />
+      <File FileName="Models/StoryphaseContext.cs" Line="12" Column="65" />
+      <File FileName="appsettings.json" Line="9" Column="6" />
+      <File FileName="Startup.cs" Line="36" Column="1" />
+      <File FileName="Pages/Stories/Index.cshtml" Line="7" Column="1" />
+      <File FileName="Pages/Index.cshtml" Line="1" Column="1" />
+      <File FileName="Pages/Shared/_Layout.cshtml" Line="24" Column="63" />
+      <File FileName="Program.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Storyphase" expanded="True">
+            <Node name="Storyphase" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+              <Node name="Migrations" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="Shared" expanded="True" />
+                <Node name="Stories" expanded="True" />
+              </Node>
+              <Node name="Properties" expanded="True" />
+              <Node name="Program.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Storyphase PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
