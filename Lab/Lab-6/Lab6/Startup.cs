@@ -49,11 +49,19 @@ namespace Lab6
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            app.UseDefaultFiles();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
             app.UseMvc();
+
+            app.UseFileServer(enableDirectoryBrowsing: true);
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync(
+              "\n Error Occurred!\n"); });
         }
     }
 }
