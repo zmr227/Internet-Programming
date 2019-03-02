@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Lab7.Models.Project
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewData["Title"] = "Labs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header>
+    <h1>Labs</h1>
+</header>
+
+<div>
+    <ul>
+        <li><a asp-action="About">About</a></li>
+        <li><a asp-action="Index">Home</a></li>
+    </ul>
+</div>
+
+<section class="column">
+    <h2>Lab 1</h2>
+    <p>Some Text Here</p>
+</section>
+
+<section class="column">
+    <h2>Lab 2</h2>
+    <p>Some Text Here</p>
+</section>
+
+<section class="column">
+    <h2>Lab 3</h2>
+    <p>Some Text Here</p>
+</section>
