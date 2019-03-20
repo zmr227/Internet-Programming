@@ -1,0 +1,61 @@
+﻿@model Lab9.Models.Author
+<!-- statement below required to use Razor TagHelpers -->
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!--
+  Edit.cshtml - View to edit existing course details, uses razor syntax
+  ver 1.0
+  Jim Fawcett, CSE686 - Internet Programming, Spring 2019
+-->
+
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>Author Information</h4>
+<hr />
+<div>
+    <div>
+        <form asp-controller="Author" asp-action="Edit" method="post">
+            <spacer-10></spacer-10>
+            <table>
+                <tr>
+                    <td><label asp-for="Id"></label></td>
+                    <td><input asp-for="Id" /></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="UserName"></label></td>
+                    <td><input asp-for="UserName" /></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="FirstName"></label></td>
+                    <td><input asp-for="FirstName" /></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="LastName"></label></td>
+                    <td><input asp-for="LastName" /></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="BirthDate"></label></td>
+                    <td><input asp-for="BirthDate" /></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Email"></label></td>
+                    <td><input asp-for="Email" /></td>
+                </tr>
+            </table>
+            <spacer-25></spacer-25>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Story/Index">Back to List</a>
+</div>

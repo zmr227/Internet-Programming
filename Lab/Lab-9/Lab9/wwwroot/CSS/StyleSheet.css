@@ -1,0 +1,63 @@
+﻿/*
+ ------------------------------------------------------------
+  StyleSheet.css - basic styles for MvcSkeleton application
+  ver 1.0
+  Jim Fawcett, CSE686 - Internet Programming, Spring 2019
+ ------------------------------------------------------------
+*/
+body {
+    margin: 2em 4em;
+    font-family: Tahoma;
+    color: #333;
+    height: 100%;
+    background: rgba(196, 102, 0, 0.2); /*-webkit-linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));*/
+}
+
+table, tr, td {
+    border: 3px solid black;
+    border-collapse: collapse;
+    background-color: white;
+    font-family: montserrat, arial, verdana;
+}
+
+td {
+    padding: 0.5em 1.5em;
+}
+
+topic-block {
+    display: block;
+    border: 2px solid maroon;
+    padding: 0.5em 1.25em 1.0em 1.25em;
+    box-shadow: #888 10px 10px 10px;
+}
+
+.indent {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.tight {
+    display: table-cell;
+    background-color:white;
+}
+
+spacer-5 {
+    display: block;
+    height: 10px;
+}
+
+spacer-10 {
+    display: block;
+    height: 10px;
+}
+
+spacer-15 {
+    display: block;
+    height: 10px;
+}
+
+spacer-25 {
+    display: block;
+    height: 10px;
+}
+

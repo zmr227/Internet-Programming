@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/CSS/StyleSheet.css" />
+    <style>
+        footer {
+            display: block;
+            position: fixed;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            font-family: montserrat, arial, verdana;
+
+            font-size: 1.2em;
+            border-top: solid;
+            color: black;
+            text-align: center;
+            padding: 0.25em;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+    <footer>
+        CSE686 - Internet Programming : Lab #9. Mvc Models
+    </footer>
+</body>
+</html>

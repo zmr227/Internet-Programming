@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Lab9.Models.Story>
+<!-- statement below required to use Razor TagHelpers -->
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewBag.Title = "Stories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lab #9. MVC Models</h2>
+<div class="indent">
+    <topic-block class="tight">
+        Mocked Story List.
+    </topic-block>
+</div>
+<spacer-25></spacer-25>
+
+<div class="indent">
+    <p>
+        @Html.ActionLink("Go to the Authors List", "Index", "Author", null, null)
+
+    </p>
+    <p>
+        <a asp-action="Create">Create New Story</a>
+    </p>
+    <table class="table">
+        <tbody>
+            @foreach (var sty in Model)
+            {
+                <tr>
+                    <td>
+                        @sty.Title
+                    </td>
+                    <td>
+                        @sty.Author
+                    </td>
+                    <td>
+                        @sty.Category
+                    </td>
+                    <td>
+                        @sty.Description
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = sty.Id /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { id = sty.Id /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = sty.Id /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
