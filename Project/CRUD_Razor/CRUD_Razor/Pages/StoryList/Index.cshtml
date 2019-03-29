@@ -1,0 +1,19 @@
+﻿@page
+@model CRUD_Razor.Pages.StoryList.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Story List</h2>
+<br />
+
+<a asp-page="CreateStory" class="btn btn-primary">Create New Story</a>
+
+@if (Model.Stories.Count() > 0)
+{
+    <div>Stories Available!</div>
+}
+else
+{
+    <div>No Story in the Database!</div>
+}
