@@ -30,3 +30,4 @@ C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Projec
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\CRUD_Razor\CRUD_Razor\obj\Debug\netcoreapp2.2\CRUD_Razor.Views.pdb
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\CRUD_Razor\CRUD_Razor\obj\Debug\netcoreapp2.2\CRUD_Razor.csproj.CopyComplete
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\CRUD_Razor\CRUD_Razor\obj\Debug\netcoreapp2.2\CRUD_Razor.csprojAssemblyReference.cache
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\CRUD_Razor\CRUD_Razor\obj\Debug\netcoreapp2.2\Razor\Pages\StoryList\EditStory.g.cshtml.cs

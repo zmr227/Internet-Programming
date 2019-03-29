@@ -1,14 +1,15 @@
 ﻿@page
-@model CRUD_Razor.Pages.StoryList.CreateStoryModel
+@model CRUD_Razor.Pages.StoryList.EditStoryModel
 @{
     ViewData["Title"] = "CreateStory";
 }
 
-<h1>Create Story</h1>
+<h1>Edit Story</h1>
 <br />
 <div style="border:1px solid #bbb9b9; border-radius:10px;">
     <form method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input hidden asp-for="story.Id" />
         <div class="row" style="padding: 30px;">
             <div class="form-group">
                 <div class="row">
@@ -55,13 +56,13 @@
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="CreateStory" class="btn btn-primary btn-sm" />
+                <input type="submit" value="EditStory" class="btn btn-primary btn-sm" />
                 <a asp-page="Index" class="btn btn-success btn-sm">Back to List</a>
             </div>
         </div>
     </form>
 </div>
 
-@section Scripts{ 
+@section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

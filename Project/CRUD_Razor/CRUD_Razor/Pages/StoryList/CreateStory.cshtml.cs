@@ -12,6 +12,9 @@ namespace CRUD_Razor.Pages.StoryList
     {
         private readonly ApplicationDbContext _db;
 
+        [TempData]
+        public string Message { get; set; }
+
         public CreateStoryModel(ApplicationDbContext db)
         {
             _db = db;
@@ -33,6 +36,8 @@ namespace CRUD_Razor.Pages.StoryList
 
             _db.Stories.Add(story); // story is auto binded here
             await _db.SaveChangesAsync();
+
+            Message = "Story created successfully! ";
 
             return RedirectToPage("Index");
         }
