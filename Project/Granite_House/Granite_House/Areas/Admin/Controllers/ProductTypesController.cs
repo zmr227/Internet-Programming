@@ -83,5 +83,70 @@ namespace Granite_House.Areas.Admin.Controllers
             }
             return View(productTypes);
         }
+
+        //GET Details Action Method
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var productType = await _db.ProductTypes.FindAsync(id);
+            if (productType == null)
+            {
+                return NotFound();
+            }
+
+            return View(productType);
+        }
+
+        //POST Details action Method
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Details(int id, ProductTypes productTypes)
+        {
+            if (id != productTypes.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _db.Update(productTypes);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(productTypes);
+        }
+
+        //GET Delete Action Method
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var productType = await _db.ProductTypes.FindAsync(id);
+            if (productType == null)
+            {
+                return NotFound();
+            }
+
+            return View(productType);
+        }
+
+        //POST Delete action Method
+        [HttpPost, ActionName("Delete")] // Though the func is named DeletePost, the view will still see it as "Delete" because the ActionName("Delete")
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeletePost(int id)
+        {
+            var productType = await _db.ProductTypes.FindAsync(id);
+            _db.ProductTypes.Remove(productType);
+            
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

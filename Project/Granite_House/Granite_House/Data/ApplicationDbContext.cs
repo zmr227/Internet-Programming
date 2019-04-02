@@ -16,5 +16,6 @@ namespace Granite_House.Data
 
         // add model to the db
         public DbSet<ProductTypes> ProductTypes { get; set; }
+        public DbSet<SpecialTags> SpecialTags { get; set; }
     }
 }
