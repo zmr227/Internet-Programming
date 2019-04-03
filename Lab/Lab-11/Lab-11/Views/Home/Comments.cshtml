@@ -44,9 +44,16 @@
           @Html.DisplayFor(modelItem => item.Story.Title)
         </td>
         <td style="padding: 0.1em;">
-            <a asp-action="EditComment" asp-route-id="@item.CommentID">Edit Comment</a> |
-          @*<a asp-action="Details" asp-route-id="@item.LectureId">Details</a> |*@
-            <a asp-action="DeleteComment" asp-route-id="@item.CommentID">Delete Comment</a>
+            <a asp-action="EditComment" asp-route-id="@item.CommentID">Edit Comment</a> 
+            @*<a asp-action="Details" asp-route-id="@item.LectureId">Details</a> |*@
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="DeleteComment" asp-route-id="@item.CommentID"> | Delete Comment </a>
+                }
+            }
+          
         </td>
       </tr>
     }

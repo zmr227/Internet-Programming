@@ -9,12 +9,12 @@ namespace Lab11.Models
     {
         public int StoryID { get; set; }
         public String Title { get; set; }
+        public String Author { get; set; }
         public String Description { get; set; }
         public String Privacy { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime LastModifiedTime { get; set; }
 
-        public virtual int? UserID { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
     }
 

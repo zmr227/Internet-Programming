@@ -70,6 +70,4 @@ C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\La
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\Lab-11\Lab-11\obj\Debug\netcoreapp2.2\Lab11.dll
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\Lab-11\Lab-11\obj\Debug\netcoreapp2.2\Lab11.pdb
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\Lab-11\Lab-11\obj\Debug\netcoreapp2.2\Lab11.csproj.CopyComplete
-C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\Lab-11\Lab-11\obj\Debug\netcoreapp2.2\Razor\Views\Account\AccessDenied.g.cshtml.cs
-C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\Lab-11\Lab-11\obj\Debug\netcoreapp2.2\Razor\Views\Account\Login.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\Lab-11\Lab-11\obj\Debug\netcoreapp2.2\Lab11.csprojAssemblyReference.cache

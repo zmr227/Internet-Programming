@@ -2,23 +2,11 @@
 
 namespace Lab11.Migrations
 {
-    public partial class AddUserToDB : Migration
+    public partial class changeSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Author",
-                table: "Stories",
-                newName: "UserID1");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "UserID1",
-                table: "Stories",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldNullable: true);
-
-            migrationBuilder.AddColumn<int>(
+            migrationBuilder.AddColumn<string>(
                 name: "UserID",
                 table: "Stories",
                 nullable: true);
@@ -35,7 +23,8 @@ namespace Lab11.Migrations
                     City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
                     Zip = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,14 +32,14 @@ namespace Lab11.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stories_UserID1",
+                name: "IX_Stories_UserID",
                 table: "Stories",
-                column: "UserID1");
+                column: "UserID");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Stories_Users_UserID1",
+                name: "FK_Stories_Users_UserID",
                 table: "Stories",
-                column: "UserID1",
+                column: "UserID",
                 principalTable: "Users",
                 principalColumn: "UserID",
                 onDelete: ReferentialAction.Restrict);
@@ -59,31 +48,19 @@ namespace Lab11.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Stories_Users_UserID1",
+                name: "FK_Stories_Users_UserID",
                 table: "Stories");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropIndex(
-                name: "IX_Stories_UserID1",
+                name: "IX_Stories_UserID",
                 table: "Stories");
 
             migrationBuilder.DropColumn(
                 name: "UserID",
                 table: "Stories");
-
-            migrationBuilder.RenameColumn(
-                name: "UserID1",
-                table: "Stories",
-                newName: "Author");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Author",
-                table: "Stories",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldNullable: true);
         }
     }
 }

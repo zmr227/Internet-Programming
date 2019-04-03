@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lab11.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190402192736_AddUserToDB")]
-    partial class AddUserToDB
+    [Migration("20190330171111_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,6 +48,8 @@ namespace Lab11.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Author");
+
                     b.Property<DateTime>("CreateTime");
 
                     b.Property<string>("Description");
@@ -58,42 +60,9 @@ namespace Lab11.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<int?>("UserID");
-
-                    b.Property<string>("UserID1");
-
                     b.HasKey("StoryID");
 
-                    b.HasIndex("UserID1");
-
                     b.ToTable("Stories");
-                });
-
-            modelBuilder.Entity("Lab11.Models.User", b =>
-                {
-                    b.Property<string>("UserID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("City");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("State");
-
-                    b.Property<string>("UserName")
-                        .IsRequired();
-
-                    b.Property<string>("Zip");
-
-                    b.HasKey("UserID");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -266,13 +235,6 @@ namespace Lab11.Migrations
                     b.HasOne("Lab11.Models.Story", "Story")
                         .WithMany("Comments")
                         .HasForeignKey("StoryID");
-                });
-
-            modelBuilder.Entity("Lab11.Models.Story", b =>
-                {
-                    b.HasOne("Lab11.Models.User")
-                        .WithMany("Stories")
-                        .HasForeignKey("UserID1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

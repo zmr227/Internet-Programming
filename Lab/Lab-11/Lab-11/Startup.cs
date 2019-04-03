@@ -25,57 +25,57 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Lab11
 {
-  public class Startup
-  {
-    public Startup(IConfiguration configuration)
+    public class Startup
     {
-      Configuration = configuration;
-    }
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-    public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-    // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices(IServiceCollection services)
-    {
-      services.Configure<CookiePolicyOptions>(options =>
-      {
-        // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-        options.CheckConsentNeeded = context => true;
-        options.MinimumSameSitePolicy = SameSiteMode.None;
-      });
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
-      services.AddDbContext<ApplicationDbContext>(options =>
-          options.UseSqlServer(
-              Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
-      services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
-          .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
-      services.AddMvc(config =>
-      {
-        var policy = new AuthorizationPolicyBuilder()
-                            .RequireAuthenticatedUser()
-                            .Build();
-        config.Filters.Add(new AuthorizeFilter(policy));
-      })
-        .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                    .RequireAuthenticatedUser()
+                                    .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            })
+              .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-      services.AddAuthorization(options =>
-      {
-        options.AddPolicy("OnlyAdminAccess", policy => policy.RequireRole("Admin"));
-      });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("OnlyAdminAccess", policy => policy.RequireRole("Admin"));
+            });
             // These components support HttpContext.Session
 
-      services.AddMvc().AddCookieTempDataProvider();
-      services.AddDistributedMemoryCache();
-      services.AddSession(options =>
-      {
-        options.IdleTimeout = TimeSpan.FromMinutes(20);
-        options.Cookie.HttpOnly = false;
-        options.Cookie.IsEssential = true;
-      });
+            services.AddMvc().AddCookieTempDataProvider();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = false;
+                options.Cookie.IsEssential = true;
+            });
 
-    }
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
