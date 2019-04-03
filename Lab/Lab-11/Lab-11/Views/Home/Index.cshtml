@@ -40,7 +40,14 @@
         <td>
             <a asp-action="EditStory" asp-route-id="@item.StoryID">Edit Story</a> |
             <a asp-action="StoryDetails" asp-route-id="@item.StoryID">Story Details</a> |
-            <a asp-action="DeleteStory" asp-route-id="@item.StoryID">Delete Story</a> |
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="DeleteStory" asp-route-id="@item.StoryID">Delete Story | </a> 
+                }
+            }
             <a asp-action="AddComment" asp-route-id="@item.StoryID">Add Comment</a> |
             <a asp-action="Comments" asp-rout-id="@item.StoryID">View Comments</a>
         </td>

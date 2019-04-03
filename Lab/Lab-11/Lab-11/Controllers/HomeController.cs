@@ -104,8 +104,8 @@ namespace Lab11.Controllers
             {
                 // nothing for now
             }
-            //return RedirectToAction("Index");
-            return View(story);
+            return RedirectToAction("Index");
+            //return View(story);
         }
         //----< shows details for each course >----------------------
 
