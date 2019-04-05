@@ -4,14 +4,16 @@ using Granite_House.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Granite_House.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190403215419_addProducts")]
+    partial class addProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,7 @@ namespace Granite_House.Data.Migrations
 
                     b.Property<string>("ShadeColor");
 
-                    b.Property<int>("SpecialTagsId");
+                    b.Property<int?>("SpecialTagsId");
 
                     b.HasKey("Id");
 
@@ -250,8 +252,7 @@ namespace Granite_House.Data.Migrations
 
                     b.HasOne("Granite_House.Models.SpecialTags", "SpecialTags")
                         .WithMany()
-                        .HasForeignKey("SpecialTagsId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SpecialTagsId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

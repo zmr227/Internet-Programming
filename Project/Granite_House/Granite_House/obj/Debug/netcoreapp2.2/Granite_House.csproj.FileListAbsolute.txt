@@ -5,7 +5,6 @@ C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Projec
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\bin\Debug\netcoreapp2.2\Granite_House.pdb
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\bin\Debug\netcoreapp2.2\Granite_House.Views.dll
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\bin\Debug\netcoreapp2.2\Granite_House.Views.pdb
-C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Granite_House.csprojAssemblyReference.cache
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Granite_House.csproj.CoreCompileInputs.cache
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Granite_House.RazorAssemblyInfo.cache
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Granite_House.RazorAssemblyInfo.cs
@@ -44,3 +43,9 @@ C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Projec
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\SpecialTags\Edit.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\SpecialTags\Details.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\SpecialTags\Delete.g.cshtml.cs
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Products\Index.g.cshtml.cs
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Products\Create.g.cshtml.cs
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Granite_House.csprojAssemblyReference.cache
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Products\Edit.g.cshtml.cs
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Products\Details.g.cshtml.cs
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Project\Granite_House\Granite_House\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Products\Delete.g.cshtml.cs

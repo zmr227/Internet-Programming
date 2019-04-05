@@ -20,6 +20,7 @@ namespace Granite_House.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            // use EF to access DB and convert whatever is in the DB and pass it to a view
             return View(_db.SpecialTags.ToList());
         }
 
@@ -28,19 +29,23 @@ namespace Granite_House.Areas.Admin.Controllers
         {
             return View();
         }
-
         // POST Create Action Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(SpecialTags specialTag)
+        public async Task<IActionResult> Create(SpecialTags SpecialTags)
         {
             if (ModelState.IsValid)
             {
-                _db.Add(specialTag);
+                _db.Add(SpecialTags);
+
+                // always use await keyword when using SaveChangesAsync()
                 await _db.SaveChangesAsync();
-                return RedirectToPage("Index");
+
+                // using nameof(Index) instead of "Index" can prevent error caused by typing error
+                return RedirectToAction(nameof(Index));
             }
-            return View(specialTag);
+
+            return View(SpecialTags);
         }
 
         //GET Edit Action Method
@@ -51,36 +56,35 @@ namespace Granite_House.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var specialTags = await _db.SpecialTags.FindAsync(id);
-            if (specialTags == null)
+            var productType = await _db.SpecialTags.FindAsync(id);
+            if (productType == null)
             {
                 return NotFound();
             }
 
-            return View(specialTags);
+            return View(productType);
         }
 
         //POST Edit action Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, SpecialTags specialTags)
+        public async Task<IActionResult> Edit(int id, SpecialTags SpecialTags)
         {
-            if (id != specialTags.Id)
+            if (id != SpecialTags.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _db.Update(specialTags);
+                _db.Update(SpecialTags);
                 await _db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
-            return View(specialTags);
+            return View(SpecialTags);
         }
 
-
-        // GET Details Action Method
+        //GET Details Action Method
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -88,35 +92,35 @@ namespace Granite_House.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var specialTag = await _db.SpecialTags.FindAsync(id);
-            if (specialTag == null)
+            var productType = await _db.SpecialTags.FindAsync(id);
+            if (productType == null)
             {
                 return NotFound();
             }
 
-            return View(specialTag);
+            return View(productType);
         }
 
-        // POST Details Action Method
+        //POST Details action Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Details(int id, SpecialTags specialTag)
+        public async Task<IActionResult> Details(int id, SpecialTags SpecialTags)
         {
-            if (id != specialTag.Id)
+            if (id != SpecialTags.Id)
             {
                 return NotFound();
             }
+
             if (ModelState.IsValid)
             {
-                _db.Update(specialTag);
+                _db.Update(SpecialTags);
                 await _db.SaveChangesAsync();
-                return RedirectToPage("Index");
+                return RedirectToAction(nameof(Index));
             }
-            return View(specialTag);
+            return View(SpecialTags);
         }
 
-
-        // GET Delete Action Method
+        //GET Delete Action Method
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,26 +128,25 @@ namespace Granite_House.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var specialTag = await _db.SpecialTags.FindAsync(id);
-            if (specialTag == null)
+            var productType = await _db.SpecialTags.FindAsync(id);
+            if (productType == null)
             {
                 return NotFound();
             }
 
-            return View(specialTag);
+            return View(productType);
         }
 
-        // POST Delete Action Method
-        [HttpPost]
+        //POST Delete action Method
+        [HttpPost, ActionName("Delete")] // Though the func is named DeletePost, the view will still see it as "Delete" because the ActionName("Delete")
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeletePost(int id)
         {
-            var specialTags = await _db.SpecialTags.FindAsync(id);
-            _db.SpecialTags.Remove(specialTags);
+            var productType = await _db.SpecialTags.FindAsync(id);
+            _db.SpecialTags.Remove(productType);
 
             await _db.SaveChangesAsync();
-            return RedirectToAction("Index");
-            
+            return RedirectToAction(nameof(Index));
         }
     }
 }
