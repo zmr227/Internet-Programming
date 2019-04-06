@@ -126,14 +126,14 @@ namespace Lab11
                 }
             }
 
-            IdentityUser user = await UserManager.FindByEmailAsync("vkumar05@syr.edu");
+            IdentityUser user = await UserManager.FindByEmailAsync("mzhang63@syr.edu");
 
             if (user == null)
             {
                 user = new IdentityUser()
                 {
-                    UserName = "vkumar05@syr.edu",
-                    Email = "vkumar05@syr.edu",
+                    UserName = "mzhang63@syr.edu",
+                    Email = "mzhang63@syr.edu",
                 };
                 await UserManager.CreateAsync(user, "Test@123");
             }

@@ -45,6 +45,8 @@ html {
 
 body {
   /* Margin bottom by footer height */
+  background-color:floralwhite;
+
   margin-bottom: 60px;
 }
 .footer {
