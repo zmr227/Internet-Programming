@@ -184,6 +184,104 @@ namespace Storyphase.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Storyphase.Models.Comments", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired();
+
+                    b.Property<int?>("StoriesId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoriesId");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Storyphase.Models.PrivacyTags", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PrivacyTags");
+                });
+
+            modelBuilder.Entity("Storyphase.Models.SpecialTags", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SpecialTags");
+                });
+
+            modelBuilder.Entity("Storyphase.Models.Stories", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateTime");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<int>("PrivacyTagId");
+
+                    b.Property<int>("SpecialTagId");
+
+                    b.Property<int>("StoryTypeId");
+
+                    b.Property<string>("Title")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PrivacyTagId");
+
+                    b.HasIndex("SpecialTagId");
+
+                    b.HasIndex("StoryTypeId");
+
+                    b.ToTable("Stories");
+                });
+
+            modelBuilder.Entity("Storyphase.Models.StoryBlocks", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired();
+
+                    b.Property<string>("Image");
+
+                    b.Property<int?>("StoriesId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoriesId");
+
+                    b.ToTable("StoryBlocks");
+                });
+
             modelBuilder.Entity("Storyphase.Models.StoryTypes", b =>
                 {
                     b.Property<int>("Id")
@@ -241,6 +339,38 @@ namespace Storyphase.Data.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Storyphase.Models.Comments", b =>
+                {
+                    b.HasOne("Storyphase.Models.Stories")
+                        .WithMany("Comments")
+                        .HasForeignKey("StoriesId");
+                });
+
+            modelBuilder.Entity("Storyphase.Models.Stories", b =>
+                {
+                    b.HasOne("Storyphase.Models.PrivacyTags", "PrivacyTags")
+                        .WithMany()
+                        .HasForeignKey("PrivacyTagId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Storyphase.Models.SpecialTags", "SpecialTags")
+                        .WithMany()
+                        .HasForeignKey("SpecialTagId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Storyphase.Models.StoryTypes", "StoryTypes")
+                        .WithMany()
+                        .HasForeignKey("StoryTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Storyphase.Models.StoryBlocks", b =>
+                {
+                    b.HasOne("Storyphase.Models.Stories")
+                        .WithMany("StoryBlocks")
+                        .HasForeignKey("StoriesId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,8 +1,29 @@
-﻿@{
+﻿@model List<Granite_House.Models.Products>
+@{
     ViewData["Title"] = "Home Page";
 }
+<br /><br />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <label style="font-size:20px; color:steelblue">@item.Name</label>
+                    </h4>
+                </div>
+                <img class="card-img-top" style="height:100%;" src="@item.Image" alt="Card Image" />
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <label style="font-size:20px;color:#a51313"><b>$@item.Price</b>/sq.ft</label>
+                        </div>
+                        <a asp-action="Details" asp-controller="Home" class="btn btn-success bg-white pull-right btn-outline-info" asp-route-id="@item.Id"> View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>

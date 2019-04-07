@@ -42,10 +42,10 @@ namespace Lab11.Controllers
         {
             // fluent API
             var comments = context_.Comments.Include(l => l.Story);
-            var orderedLects = comments.OrderBy(l => l.PostDate)
+            var orderedComments = comments.OrderBy(l => l.PostDate)
               .OrderBy(l => l.Story)
               .Select(l => l);
-            return View(orderedLects);
+            return View(orderedComments);
 
             // Linq
             //var lects = context_.Lectures.Include(l => l.Course);
