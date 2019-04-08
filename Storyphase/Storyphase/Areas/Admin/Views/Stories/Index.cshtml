@@ -46,8 +46,11 @@
                 @Html.DisplayFor(m => item.StoryTypes.Name)
             </td>
             <td>
-                @Html.DisplayFor(m => item.SpecialTags.Name)
-            </td>
+                @if (!item.SpecialTags.Name.Equals("--None--"))
+                {
+                    @Html.DisplayFor(m => item.SpecialTags.Name)
+                }
+                </td>
             <td>
                 @Html.DisplayFor(m => item.PrivacyTags.Name)
             </td>

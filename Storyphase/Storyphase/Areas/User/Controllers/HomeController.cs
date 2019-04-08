@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Storyphase.Data;
 using Storyphase.Models;
 
 namespace Storyphase.Controllers
@@ -11,14 +13,26 @@ namespace Storyphase.Controllers
     [Area("User")]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext _db;
+
+        public HomeController(ApplicationDbContext db)
         {
-            return View();
+            _db = db;
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var storyList = await _db.Stories.Include(m => m.StoryTypes).Include(m => m.SpecialTags).Include(m => m.PrivacyTags).ToListAsync();
+
+            return View(storyList);
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+
+            var story = await _db.Stories.Include(m => m.StoryTypes).Include(m => m.SpecialTags).Include(m => m.PrivacyTags).Where(m=>m.Id == id).FirstOrDefaultAsync();
+
+            return View(story);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

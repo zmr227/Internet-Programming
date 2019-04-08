@@ -1,3 +1,29 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<Storyphase.Models.Stories>
+<br /><br />
+<div class="row">
+    @foreach(var item in Model)
+    {
+        <div class="col-4">
+            <div class="card md-4">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <label style="font-size:23px; color:blueviolet;">@item.Title</label>
+                    </h4>
+                </div>
+                <img class="card-img-top" style="height:100%;" src="@item.Image" alt="Card Image" />
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            @if (!item.SpecialTags.Name.Equals("--None--"))
+                            {
+                                <label style="font-size: 20px; color: #a51313"><b>@item.SpecialTags.Name</b></label>
+                            }
+                        </div>
+                        <a asp-action="Details" asp-controller="Home" class="btn btn-success pull-right bg-white btn-outline-info" asp-route-id="@item.Id">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
