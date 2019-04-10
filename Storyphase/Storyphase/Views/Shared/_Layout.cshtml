@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using Storyphase.Extensions
+@using Storyphase.Utility
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -43,6 +49,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-white-50" asp-area="Admin" asp-controller="Stories" asp-action="Index">Stories</a>
                         </li>
+
+                        @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite") != null)
+                        {
+                            <li style="color: white">
+                                <a asp-area="User" asp-controller="Favorite" asp-action="Index" class="nav-link">
+                                    <i class="fas fa-heart"></i> &nbsp;
+                                    @{
+                                        var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite").Count;
+                                    }
+                                    (@count)
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li style="color: white">
+                                <a asp-area="User" asp-controller="Favorite" asp-action="Index" class="nav-link">
+                                    <i class="fas fa-heart"></i> &nbsp;
+                                    (0)
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

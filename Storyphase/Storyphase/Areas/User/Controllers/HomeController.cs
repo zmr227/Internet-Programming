@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Storyphase.Data;
+using Storyphase.Extensions;
 using Storyphase.Models;
 
 namespace Storyphase.Controllers
@@ -33,6 +34,21 @@ namespace Storyphase.Controllers
             var story = await _db.Stories.Include(m => m.StoryTypes).Include(m => m.SpecialTags).Include(m => m.PrivacyTags).Where(m=>m.Id == id).FirstOrDefaultAsync();
 
             return View(story);
+        }
+
+        [HttpPost, ActionName("Details")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DetailsPost(int id)
+        {
+            List<int> lstFavorite = HttpContext.Session.Get<List<int>>("ssFavorite");
+            if(lstFavorite == null)
+            {
+                lstFavorite = new List<int>();
+            }
+            lstFavorite.Add(id);
+            HttpContext.Session.Set("ssFavorite", lstFavorite);
+
+            return RedirectToAction("Index", "Home", new { area = "User" });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
