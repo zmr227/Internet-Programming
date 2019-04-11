@@ -1,5 +1,8 @@
 ﻿@model Storyphase.Models.Stories
 @using Storyphase.Extensions
+@using Microsoft.AspNetCore.Http
+
+@inject IHttpContextAccessor HttpContextAccessor
 
 <br />
 <h2 class="text-info">Story Details</h2>
@@ -63,7 +66,24 @@
 
                 </div>
                 <div class="col-8">
-                    <button type="submit" value="Add to Favorite" asp-route-id="@Model.Id" class="btn btn-primary form-control">Add to Favorite</button>
+                    @{
+                        bool isInFavorite = false;
+                        List<int> lstFavorite = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite");
+                        if (lstFavorite != null && lstFavorite.Contains(Model.Id))
+                        {
+                            isInFavorite = true;
+
+                        }
+                    }
+                    @if (isInFavorite)
+                    {
+                        <button type="submit" value="Remove From Favorite" asp-action="Remove" asp-route-id="@Model.Id" class="btn btn-danger form-control">Remove From Favorite</button>
+
+                    }
+                    else
+                    {
+                        <button type="submit" value="Add to Favorite" asp-route-id="@Model.Id" class="btn btn-primary form-control">Add to Favorite</button>
+                    }
                 </div>
             </div>
 

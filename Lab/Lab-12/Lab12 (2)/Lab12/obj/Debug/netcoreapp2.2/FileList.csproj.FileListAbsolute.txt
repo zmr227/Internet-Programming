@@ -1,0 +1,14 @@
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\bin\Debug\netcoreapp2.2\FileList.deps.json
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\bin\Debug\netcoreapp2.2\FileList.runtimeconfig.json
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\bin\Debug\netcoreapp2.2\FileList.runtimeconfig.dev.json
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\bin\Debug\netcoreapp2.2\FileList.dll
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\bin\Debug\netcoreapp2.2\FileList.pdb
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\obj\Debug\netcoreapp2.2\FileList.csproj.CoreCompileInputs.cache
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\obj\Debug\netcoreapp2.2\FileList.RazorAssemblyInfo.cache
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\obj\Debug\netcoreapp2.2\FileList.RazorAssemblyInfo.cs
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\obj\Debug\netcoreapp2.2\FileList.AssemblyInfoInputs.cache
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\obj\Debug\netcoreapp2.2\FileList.AssemblyInfo.cs
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\obj\Debug\netcoreapp2.2\FileList.RazorTargetAssemblyInfo.cache
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\obj\Debug\netcoreapp2.2\FileList.dll
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\obj\Debug\netcoreapp2.2\FileList.pdb
+C:\Users\可爱的我\Documents\小可爱的IP作业\FileList (2)\FileList\obj\Debug\netcoreapp2.2\FileList.csprojAssemblyReference.cache

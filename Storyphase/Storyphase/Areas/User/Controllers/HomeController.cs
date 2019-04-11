@@ -46,9 +46,26 @@ namespace Storyphase.Controllers
                 lstFavorite = new List<int>();
             }
             lstFavorite.Add(id);
+            // set the session
             HttpContext.Session.Set("ssFavorite", lstFavorite);
 
             return RedirectToAction("Index", "Home", new { area = "User" });
+        }
+
+        // remove from favorite list
+        public IActionResult Remove(int id)
+        {
+            List<int> lstFavorite = HttpContext.Session.Get<List<int>>("ssFavorite");
+            if (lstFavorite.Count > 0)
+            {
+                if (lstFavorite.Contains(id))
+                {
+                    lstFavorite.Remove(id);
+                }
+            }
+            // set the session
+            HttpContext.Session.Set("ssFavorite", lstFavorite);
+            return RedirectToAction(nameof(Index));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
