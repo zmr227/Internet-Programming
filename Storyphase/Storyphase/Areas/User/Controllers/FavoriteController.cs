@@ -42,5 +42,27 @@ namespace Storyphase.Areas.User.Controllers
             }
             return View(FavoriteVM);
         }
+
+        // Post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Index")]
+        public IActionResult IndexPost()
+        {
+            List<int> lstFavorite = HttpContext.Session.Get<List<int>>("ssFavorite");
+            foreach(int storyId in lstFavorite)
+            {
+                StoriesAddToFavorite storiesAddToFavorite = new StoriesAddToFavorite
+                {
+                    StoryId = storyId
+                };
+                _db.StoriesAddToFavorites.Add(storiesAddToFavorite);
+            }
+            _db.SaveChanges();
+            // empty list
+            // lstFavorite = new List<int>();
+            // HttpContext.Session.Set("ssFavorite", lstFavorite);
+            return RedirectToAction("Index");
+        }
     }
 }
