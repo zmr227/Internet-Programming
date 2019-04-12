@@ -56,3 +56,4 @@ C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyp
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Stories\Details.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\Stories\Delete.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\User\Views\Home\Details.g.cshtml.cs
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\User\Views\Favorite\Index.g.cshtml.cs

@@ -21,5 +21,7 @@ namespace Storyphase.Data
         public DbSet<StoryBlocks> StoryBlocks { get; set; }
         public DbSet<Stories> Stories { get; set; }
         public DbSet<Comments> Comments { get; set; }
+
+        public DbSet<StoriesAddToFavorite> StoriesAddToFavorites { get; set; }
     }
 }
