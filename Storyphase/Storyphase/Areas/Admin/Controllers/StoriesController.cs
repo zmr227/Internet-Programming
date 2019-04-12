@@ -34,7 +34,7 @@ namespace Storyphase.Controllers
                 StoryTypes = _db.StoryTypes.ToList(),
                 SpecialTags = _db.SpecialTags.ToList(),
                 PrivacyTags = _db.PrivacyTags.ToList(),
-                Stories = new Models.Stories()
+                Stories = new Stories()
             };
         }
 

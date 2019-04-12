@@ -32,11 +32,11 @@ namespace Storyphase.Areas.User.Controllers
         public async Task<IActionResult> Index()
         {
             List<int> lstFavorite = HttpContext.Session.Get<List<int>>("ssFavorite");
-            if(lstFavorite.Count > 0)
+            if (lstFavorite.Count > 0)
             {
-                foreach(int item in lstFavorite)
+                foreach (int item in lstFavorite)
                 {
-                    Stories sty = _db.Stories.Include(p=>p.SpecialTags).Include(p => p.StoryTypes).Include(p => p.PrivacyTags).Where(p => p.Id == item).FirstOrDefault();
+                    Stories sty = _db.Stories.Include(p => p.SpecialTags).Include(p => p.StoryTypes).Include(p => p.PrivacyTags).Where(p => p.Id == item).FirstOrDefault();
                     FavoriteVM.Stories.Add(sty);
                 }
             }
@@ -50,19 +50,37 @@ namespace Storyphase.Areas.User.Controllers
         public IActionResult IndexPost()
         {
             List<int> lstFavorite = HttpContext.Session.Get<List<int>>("ssFavorite");
-            foreach(int storyId in lstFavorite)
+            
+            foreach(int item in lstFavorite)
             {
-                StoriesAddToFavorite storiesAddToFavorite = new StoriesAddToFavorite
+                StoriesAddToFavorite storiesSelected = new StoriesAddToFavorite
                 {
-                    StoryId = storyId
+                    StoryId = item
                 };
-                _db.StoriesAddToFavorites.Add(storiesAddToFavorite);
+               
+                _db.StoriesAddToFavorites.Add(storiesSelected);
             }
             _db.SaveChanges();
             // empty list
             // lstFavorite = new List<int>();
             // HttpContext.Session.Set("ssFavorite", lstFavorite);
             return RedirectToAction("Index");
+        }
+
+        // remove favorite
+        public IActionResult Remove(int id)
+        {
+            List<int> lstFavorite = HttpContext.Session.Get<List<int>>("ssFavorite");
+            if(lstFavorite.Count > 0)
+            {
+                if (lstFavorite.Contains(id))
+                {
+                    lstFavorite.Remove(id);
+                }
+            }
+            HttpContext.Session.Set("ssFavorite", lstFavorite);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
