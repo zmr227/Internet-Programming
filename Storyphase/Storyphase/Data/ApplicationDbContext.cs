@@ -23,5 +23,7 @@ namespace Storyphase.Data
         public DbSet<Comments> Comments { get; set; }
 
         public DbSet<StoriesAddToFavorite> StoriesAddToFavorites { get; set; }
+
+        public DbSet<ApplicationUsers> ApplicationUsers { get; set; }
     }
 }

@@ -9,5 +9,8 @@ namespace Storyphase.Utility
     {
         public const string DefaultStoryImage = "default_image.png";
         public const string ImageFolder = @"image\StoryImage";
+
+        public const string AdminUser = "Admin";
+        public const string User = "User";
     }
 }
