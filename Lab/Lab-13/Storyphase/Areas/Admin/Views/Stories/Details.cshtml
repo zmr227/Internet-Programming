@@ -1,0 +1,65 @@
+﻿@model Storyphase.Models.ViewModels.StoriesViewModel
+@using Storyphase.Extensions
+
+<br />
+<h2 class="text-info">Story Details</h2>
+<div class="p-4 border rounded row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-8">
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Stories.Title"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Stories.Title" readonly class="form-control" />
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Stories.Description"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Stories.Description" readonly class="form-control" />
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="StoryTypes"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Stories.StoryTypes.Name" readonly class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="SpecialTags"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Stories.SpecialTags.Name" readonly class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="PrivacyTags"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Stories.PrivacyTags.Name" readonly class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="col-1">
+
+    </div>
+    <div class="col-3">
+        <img src="@Model.Stories.Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+    </div>
+
+    <br />
+    <div class="form-group">
+        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.Stories.Id">Edit</a>
+        <a asp-action="Index" class="btn btn-success">Back to List</a>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿@model Storyphase.Models.ViewModels.StoriesViewModel
+@using Storyphase.Extensions
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+<h2 class="text-info">Edit Story</h2>
+<form method="post" enctype="multipart/form-data">
+    <div class="p-4 border rounded row">
+        <input hidden asp-for="Stories.Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Stories.Title"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Stories.Title" class="form-control" />
+                </div>
+                <span asp-validation-for="Stories.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Stories.Description"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Stories.Description" class="form-control" />
+                </div>
+                <span asp-validation-for="Stories.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Stories.Image"></label>
+                </div>
+                <div class="col-8">
+                    <input type="file" name="files" multiple class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="StoryTypes"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="@Model.Stories.StoryTypeId" asp-items="Model.StoryTypes.ToSelectListItem(Model.Stories.StoryTypeId)" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="SpecialTags"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="@Model.Stories.SpecialTagId" asp-items="Model.SpecialTags.ToSelectListItem(Model.Stories.SpecialTagId)" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PrivacyTags"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="@Model.Stories.PrivacyTagId" asp-items="Model.PrivacyTags.ToSelectListItem(Model.Stories.PrivacyTagId)" class="form-control"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-3">
+            <img src="@Model.Stories.Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+        </div>
+
+        <br />
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Update" />
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,0 +1,72 @@
+﻿@model Storyphase.Models.ViewModels.FavoriteViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<form method="post">
+    <br /><br />
+    <h2 class="text-info"> Your Favorite Stories</h2>
+    <br />
+    @if (Model.Stories.Count > 0)
+    {
+    <div class="container border rounded" style="padding: 15px;">
+        <div class="row">
+            <table class="table table-striped" width="100%">
+                <tr class="table-info">
+                    <th style="text-align:center; width:20%;"></th>
+                    <th style="text-align:center;">
+                        <label asp-for="@Model.Stories.FirstOrDefault().Title"></label>
+                    </th>
+                    <th style="text-align:center;">
+                        <label asp-for="@Model.Stories.FirstOrDefault().Description"></label>
+                    </th>
+                    <th style="text-align:center;">
+                        <label asp-for="@Model.Stories.FirstOrDefault().StoryTypes"></label>
+                    </th>
+                    <th style="text-align:center;">
+                        <label asp-for="@Model.Stories.FirstOrDefault().PrivacyTags"></label>
+                    </th>
+                    <th style="text-align:center;"></th>
+                </tr>
+                @foreach (var item in Model.Stories)
+                {
+                    <tr style="padding:50px;">
+                        <td>
+                            <a asp-area="User" asp-controller="Home" asp-action="Details" asp-route-id="@item.Id">
+                                <img src="@item.Image" width="100%" style="margin:auto; display:block; border-radius:5px; border:1px solid #bbb9b9" />
+                            </a>
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(m => item.Title)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(m => item.Description)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(m => item.StoryTypes.Name)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(m => item.PrivacyTags.Name)
+                        </td>
+                        <td style="text-align:center;">
+                            <button type="submit" class="btn btn-danger" asp-action="Remove" asp-route-id="@item.Id">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-12">
+            <button type="submit" id="btnPlaceOrder" class="btn btn-success">Save to Database</button>
+        </div>
+    </div>
+    }
+    else
+    {
+        <div>No stories added to favorite yet...</div>
+    }
+</form>
+
+@section Scripts{ 
+    <script></script>
+}
