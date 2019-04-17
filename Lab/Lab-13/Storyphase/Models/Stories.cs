@@ -38,18 +38,6 @@ namespace Storyphase.Models
         public virtual PrivacyTags PrivacyTags { get; set; }
     }
 
-    public class StoryBlocks
-    {
-        public long Id { get; set; }
-        [Required]
-        public string Content { get; set; }
-        public byte[] Image { get; set; }
-
-        public long? StoryId { get; set; }
-        [ForeignKey("StoriesId")]
-        public Stories Story { get; set; }
-    }
-
     public class Comments
     {
         public long Id { get; set; }
@@ -57,7 +45,7 @@ namespace Storyphase.Models
         [Required]
         public string Content { get; set; }
 
-        public long? StoryId { get; set; }
+        public int? StoryId { get; set; }
         [ForeignKey("StoriesId")]
         public Stories Story { get; set; }
     }

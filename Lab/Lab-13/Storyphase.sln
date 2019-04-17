@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Storyphase", "Storyphase\Storyphase.csproj", "{4151F93C-9C4F-4FB6-9B52-362C16BABDB6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreConsoleClient", "..\..\..\WebApiLect13\ConsoleClient\CoreConsoleClient.csproj", "{CE02B7C7-9C7A-4325-8A7B-E63E11AB238C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4151F93C-9C4F-4FB6-9B52-362C16BABDB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4151F93C-9C4F-4FB6-9B52-362C16BABDB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4151F93C-9C4F-4FB6-9B52-362C16BABDB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE02B7C7-9C7A-4325-8A7B-E63E11AB238C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE02B7C7-9C7A-4325-8A7B-E63E11AB238C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE02B7C7-9C7A-4325-8A7B-E63E11AB238C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE02B7C7-9C7A-4325-8A7B-E63E11AB238C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

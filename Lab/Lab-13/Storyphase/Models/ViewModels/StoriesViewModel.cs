@@ -8,6 +8,8 @@ namespace Storyphase.Models.ViewModels
     public class StoriesViewModel
     {
         public Stories Stories { get; set; }
+        public IList<StoryBlock> StoryBlocks { get; set; }
+        public IList<Comments> Comments { get; set; }
 
         public IEnumerable<StoryTypes> StoryTypes { get; set; }
         public IEnumerable<SpecialTags> SpecialTags { get; set; }

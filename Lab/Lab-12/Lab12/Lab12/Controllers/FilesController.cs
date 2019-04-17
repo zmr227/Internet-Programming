@@ -141,9 +141,7 @@ namespace Lab12.Controllers
             }
         }
 
-
-
-
+        
         // Upload files
         [HttpPost("Uploads")]
         public async Task<IActionResult> UploadFiles(List<IFormFile> files)

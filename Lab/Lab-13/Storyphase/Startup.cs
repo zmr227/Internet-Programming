@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Storyphase.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Storyphase.Models;
 
 namespace Storyphase
 {
@@ -38,6 +39,11 @@ namespace Storyphase
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            /*services.AddDbContext<FileContext>(opt =>
+                 opt.UseSqlServer(
+                 Configuration.GetConnectionString("DefaultConnection")));*/
+           
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>()

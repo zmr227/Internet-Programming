@@ -196,7 +196,7 @@ namespace Storyphase.Migrations
 
                     b.Property<int?>("StoriesId");
 
-                    b.Property<long?>("StoryId");
+                    b.Property<int?>("StoryId");
 
                     b.HasKey("Id");
 
@@ -280,22 +280,25 @@ namespace Storyphase.Migrations
                     b.ToTable("StoriesAddToFavorites");
                 });
 
-            modelBuilder.Entity("Storyphase.Models.StoryBlocks", b =>
+            modelBuilder.Entity("Storyphase.Models.StoryBlock", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<long>("StoryBlockId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Content")
-                        .IsRequired();
+                    b.Property<string>("Content");
 
-                    b.Property<byte[]>("Image");
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Path");
 
                     b.Property<int?>("StoriesId");
 
                     b.Property<long?>("StoryId");
 
-                    b.HasKey("Id");
+                    b.HasKey("StoryBlockId");
 
                     b.HasIndex("StoriesId");
 
@@ -403,7 +406,7 @@ namespace Storyphase.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Storyphase.Models.StoryBlocks", b =>
+            modelBuilder.Entity("Storyphase.Models.StoryBlock", b =>
                 {
                     b.HasOne("Storyphase.Models.Stories", "Story")
                         .WithMany()

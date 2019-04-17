@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Storyphase.Data;
-using Storyphase.Helper;
 using Storyphase.Models;
 using Storyphase.Models.ViewModels;
 using Storyphase.Utility;
@@ -19,8 +18,6 @@ namespace Storyphase.Controllers
     public class StoriesController : Controller
     {
         private readonly ApplicationDbContext _db;
-
-        FileAPI _api = new FileAPI();
 
         private readonly HostingEnvironment _hostingEnvironment;
 
@@ -63,6 +60,7 @@ namespace Storyphase.Controllers
             try
             {
                 // TODO: Add insert logic here
+
                 _db.Stories.Add(StoriesVM.Stories);
                 await _db.SaveChangesAsync();
 
@@ -70,11 +68,16 @@ namespace Storyphase.Controllers
                 var files = HttpContext.Request.Form.Files;
                 var storyFromDb = _db.Stories.Find(StoriesVM.Stories.Id);
 
+
                 if (files.Count != 0)
                 {
                     // if image has been uploaded
                     var uploads = Path.Combine(webRootPath, SD.ImageFolder);
                     var extension = Path.GetExtension(files[0].FileName);
+
+                    // create a folder for current story
+                    string pathString = Path.Combine(webRootPath, SD.StoryFolder) + @"\" + StoriesVM.Stories.Id.ToString();
+                    Directory.CreateDirectory(pathString);
 
                     using (var filestream = new FileStream(Path.Combine(uploads, StoriesVM.Stories.Id + extension), FileMode.Create))
                     {
