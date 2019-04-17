@@ -191,3 +191,4 @@ C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\La
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\Lab-13\Storyphase\obj\Debug\netcoreapp2.2\Storyphase.dll
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\Lab-13\Storyphase\obj\Debug\netcoreapp2.2\Storyphase.pdb
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\Lab-13\Storyphase\obj\Debug\netcoreapp2.2\Storyphase.csproj.CopyComplete
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Lab\Lab-13\Storyphase\obj\Debug\netcoreapp2.2\Storyphase.csprojAssemblyReference.cache
