@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Storyphase.Data;
 using Storyphase.Models;
+using Storyphase.Utility;
 
 namespace Storyphase.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.AdminUser)]
     [Area("Admin")]
     public class AdminUsersController : Controller
     {
@@ -91,7 +94,7 @@ namespace Storyphase.Areas.Admin.Controllers
         public IActionResult DeletePOST(string id)
         {
             ApplicationUsers userFromDb = _db.ApplicationUsers.Where(u => u.Id == id).FirstOrDefault();
-            userFromDb.LockoutEnd = DateTime.Now.AddYears(1000);
+            userFromDb.LockoutEnd = DateTime.Now.AddYears(100);
 
             _db.SaveChanges();
             return RedirectToAction(nameof(Index));

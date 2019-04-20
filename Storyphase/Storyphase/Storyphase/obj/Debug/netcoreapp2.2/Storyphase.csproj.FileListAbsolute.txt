@@ -376,13 +376,11 @@ C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyp
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
-C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\View\Shared\_CookieConsentPartial.g.cshtml.cs
-C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\View\Shared\_LoginPartial.g.cshtml.cs
-C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\View\_ViewImports.g.cshtml.cs
-C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\View\_ViewStart.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Storyphase.RazorTargetAssemblyInfo.cache
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Storyphase.RazorTargetAssemblyInfo.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Storyphase.Views.pdb
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Storyphase.dll
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Storyphase.pdb
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Storyphase.csproj.CopyComplete
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\AdminUsers\Edit.g.cshtml.cs
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\AdminUsers\Delete.g.cshtml.cs

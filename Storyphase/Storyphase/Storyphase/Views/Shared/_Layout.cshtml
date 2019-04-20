@@ -38,20 +38,28 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white-50" asp-area="Admin" asp-controller="StoryTypes" asp-action="Index">Story Types</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white-50" asp-area="Admin" asp-controller="SpecialTags" asp-action="Index">Special Tags</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white-50" asp-area="Admin" asp-controller="PrivacyTags" asp-action="Index">Privacy Tags</a>
+                            <a class="nav-link text-white-50" asp-area="User" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white-50" asp-area="Admin" asp-controller="Stories" asp-action="Index">Stories</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white-50" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin Users</a>
-                        </li>
+
+                        @if (User.IsInRole(SD.AdminUser))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white-50" asp-area="Admin" asp-controller="StoryTypes" asp-action="Index">Story Types</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white-50" asp-area="Admin" asp-controller="SpecialTags" asp-action="Index">Special Tags</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white-50" asp-area="Admin" asp-controller="PrivacyTags" asp-action="Index">Privacy Tags</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white-50" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin Users</a>
+                            </li>
+                        }
 
                         @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite") != null)
                         {

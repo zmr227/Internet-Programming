@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Storyphase.Data;
 using Storyphase.Models;
 using Microsoft.AspNetCore.Mvc;
+using Storyphase.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Storyphase.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.AdminUser)]
     [Area("Admin")]
     public class PrivacyTagsController : Controller
     {
