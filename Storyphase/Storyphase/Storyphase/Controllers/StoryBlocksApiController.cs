@@ -15,13 +15,12 @@ namespace Storyphase.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StoryBlocksController : ControllerBase
+    public class StoryBlocksApiController : ControllerBase
     {
         private readonly ApplicationDbContext context_;
         private IHostingEnvironment _env;
-
         
-        public StoryBlocksController(ApplicationDbContext context, IHostingEnvironment env)
+        public StoryBlocksApiController(ApplicationDbContext context, IHostingEnvironment env)
         {
             context_ = context;
             _env = env;
@@ -52,6 +51,19 @@ namespace Storyphase.Controllers
                 return NotFound();
             }
             return fileItem;
+        }
+
+        // GET api/<controller>/5
+        [HttpGet("Story/{id}")]
+        public async Task<ActionResult<StoryBlock>> GetAllBlocksByStory(int id)
+        {
+            var blocks = context_.StoryBlocks.Where(s=>s.StoriesId == id);
+
+            if (blocks == null)
+            {
+                return NotFound();
+            }
+            return Ok(blocks);
         }
 
         // POST api/<controller>
