@@ -18,7 +18,7 @@ namespace Storyphase.Data
         public DbSet<SpecialTags> SpecialTags { get; set; }
         public DbSet<PrivacyTags> PrivacyTags { get; set; }
 
-        public DbSet<StoryBlock> StoryBlocks { get; set; }
+        public DbSet<StoryBlocks> StoryBlocks { get; set; }
         public DbSet<Stories> Stories { get; set; }
         public DbSet<Comments> Comments { get; set; }
 

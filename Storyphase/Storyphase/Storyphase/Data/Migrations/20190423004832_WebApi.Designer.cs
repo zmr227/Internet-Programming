@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Storyphase.Data;
 
 namespace Storyphase.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190423004832_WebApi")]
+    partial class WebApi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -281,9 +283,9 @@ namespace Storyphase.Migrations
                     b.ToTable("StoriesAddToFavorites");
                 });
 
-            modelBuilder.Entity("Storyphase.Models.StoryBlock", b =>
+            modelBuilder.Entity("Storyphase.Models.StoryBlocks", b =>
                 {
-                    b.Property<long>("StoryBlockId")
+                    b.Property<long>("StoryBlocksId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -297,7 +299,7 @@ namespace Storyphase.Migrations
 
                     b.Property<int?>("StoriesId");
 
-                    b.HasKey("StoryBlockId");
+                    b.HasKey("StoryBlocksId");
 
                     b.HasIndex("StoriesId");
 
@@ -375,7 +377,7 @@ namespace Storyphase.Migrations
             modelBuilder.Entity("Storyphase.Models.Comments", b =>
                 {
                     b.HasOne("Storyphase.Models.Stories", "Stories")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("StoriesId");
                 });
 
@@ -405,10 +407,10 @@ namespace Storyphase.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Storyphase.Models.StoryBlock", b =>
+            modelBuilder.Entity("Storyphase.Models.StoryBlocks", b =>
                 {
                     b.HasOne("Storyphase.Models.Stories", "Stories")
-                        .WithMany()
+                        .WithMany("StoryBlocks")
                         .HasForeignKey("StoriesId");
                 });
 #pragma warning restore 612, 618

@@ -16,19 +16,19 @@ namespace Storyphase.Controllers
             return View();
         }
 
-        private List<StoryBlock> GetBlocksFromAPI()
+        private List<StoryBlocks> GetBlocksFromAPI()
         {
             try
             {
                 var client = new HttpClient();
-                var blockList = new List<StoryBlock>();
+                var blockList = new List<StoryBlocks>();
 
                 var getDataTask = client.GetAsync("https://localhost:44307/api/StoryBlocks")
                     .ContinueWith(response => {
                         var result = response.Result;
                         if (result.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            var readResult = result.Content.ReadAsAsync<List<StoryBlock>>();
+                            var readResult = result.Content.ReadAsAsync<List<StoryBlocks>>();
                             readResult.Wait();
                             blockList = readResult.Result;
                         }

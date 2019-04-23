@@ -27,22 +27,22 @@ namespace Storyphase.Controllers
            
             if (context_.StoryBlocks.Count() == 0)
             {
-                context_.StoryBlocks.Add(new StoryBlock { Name = "SeedBlock1", Path = "~/Stories", Content = "Hello World" });
-                context_.StoryBlocks.Add(new StoryBlock { Name = "SeedBlock2", Path = "~/Stories", Content = "Hello Again" });
+                context_.StoryBlocks.Add(new StoryBlocks { Name = "SeedBlock1", Path = "~/Stories", Content = "Hello World" });
+                context_.StoryBlocks.Add(new StoryBlocks { Name = "SeedBlock2", Path = "~/Stories", Content = "Hello Again" });
                 context_.SaveChanges();
             }
         }
         // GET: api/<controller>
         // ActionResults are automatially serialized to JSON and written into the body of the reply
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StoryBlock>>> GetStoryBlocks()
+        public async Task<ActionResult<IEnumerable<StoryBlocks>>> GetStoryBlocks()
         {
             return await context_.StoryBlocks.ToListAsync();
         }
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<StoryBlock>> GetStoryBlock(long id)
+        public async Task<ActionResult<StoryBlocks>> GetStoryBlock(long id)
         {
             var fileItem = await context_.StoryBlocks.FindAsync(id);
            
@@ -55,7 +55,7 @@ namespace Storyphase.Controllers
 
         // GET api/<controller>/5
         [HttpGet("Story/{id}")]
-        public async Task<ActionResult<StoryBlock>> GetAllBlocksByStory(int id)
+        public async Task<ActionResult<StoryBlocks>> GetAllBlocksByStory(int id)
         {
             var blocks = context_.StoryBlocks.Where(s=>s.StoriesId == id);
 
@@ -68,22 +68,22 @@ namespace Storyphase.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public async Task<ActionResult<StoryBlock>> PostStoryBlock(StoryBlock storyBlock)
+        public async Task<ActionResult<StoryBlocks>> PostStoryBlock(StoryBlocks storyBlock)
         {
             try
             {
                 // Find the block by id
-                var blockFromDb = context_.StoryBlocks.SingleOrDefault(c => c.StoryBlockId == storyBlock.StoryBlockId);
+                var blockFromDb = context_.StoryBlocks.SingleOrDefault(c => c.StoryBlocksId == storyBlock.StoryBlocksId);
                 if (blockFromDb == null)
                     return NotFound();
 
                 // Add Block
-                var block = new StoryBlock
+                var block = new StoryBlocks
                 {
                     Name = storyBlock.Name,
                     Image = storyBlock.Image,
                     Content = storyBlock.Content,
-                    StoryBlockId = storyBlock.StoryBlockId,
+                    StoryBlocksId = storyBlock.StoryBlocksId,
                     Path = storyBlock.Path
                 };
                 context_.StoryBlocks.Add(block);
@@ -113,7 +113,7 @@ namespace Storyphase.Controllers
             try
             {
                 // check validation 
-                var blockInDb = context_.StoryBlocks.SingleOrDefault(c => c.StoryBlockId == storyBlockId && c.StoriesId == storyId);
+                var blockInDb = context_.StoryBlocks.SingleOrDefault(c => c.StoryBlocksId == storyBlockId && c.StoriesId == storyId);
                 if (blockInDb == null)
                     return NotFound();
 
