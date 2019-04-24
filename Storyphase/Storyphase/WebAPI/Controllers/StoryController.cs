@@ -20,26 +20,30 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Stories> GetAllStories()
+        public async Task<ActionResult<IEnumerable<Stories>>> Index()
         {
-            var story = context_.Stories.ToList();
+            var stories = context_.Stories
+                            .Include(s => s.StoryBlocks)
+                            .Include(s => s.Comments)
+                            .ToList();
 
-            return story;
+            return stories;
         }
 
         [HttpGet("{id}")]
-        public Stories GetStory(int id)
+        public async Task<ActionResult> GetStory(int id)
         {
-            var story = context_.Stories.SingleOrDefault(s => s.Id == id);
+            var story = await context_.Stories
+                                .Include(s => s.StoryBlocks)
+                                .Include(s => s.Comments)
+                                .FirstOrDefaultAsync(s => s.Id == id);
 
             if (story == null)
             {
-                return null;
+                return NotFound();
             }
-
-            //context_.Entry(story).Collection(s => s.StoryBlocks).Load();
             
-            return story;
+            return Ok(story);
         }
 
 
