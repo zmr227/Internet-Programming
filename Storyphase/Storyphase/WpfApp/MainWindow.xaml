@@ -20,5 +20,6 @@
             </Button.Style>
         </Button>
         <TextBlock Name="txt1" HorizontalAlignment="Left" Margin="72,102,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="239" Width="468"/>
+        
     </Grid>
 </Window>

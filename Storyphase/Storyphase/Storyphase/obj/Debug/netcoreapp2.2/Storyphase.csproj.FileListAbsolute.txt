@@ -386,3 +386,4 @@ C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyp
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\AdminUsers\Delete.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\bin\Debug\netcoreapp2.2\WebAPI.dll
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\bin\Debug\netcoreapp2.2\WebAPI.pdb
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\User\Views\Home\BlockShow.g.cshtml.cs

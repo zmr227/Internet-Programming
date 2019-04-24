@@ -1,0 +1,19 @@
+﻿@model List<Storyphase.Models.StoryBlocks>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="form-group row">
+            <div class="">
+                <input asp-for="@item.Name" readonly class="form-control" />
+            </div>
+            <div class="">
+                <input asp-for="@item.Content" readonly class="form-control" />
+            </div>
+            <div>
+                <img style="height:100%;" src="@item.Image" />
+            </div>
+            
+    </div>
+}
+

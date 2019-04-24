@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Storyphase.Data;
 using Storyphase.Extensions;
 using Storyphase.Models;
+using Storyphase.Models.ViewModels;
 
 namespace Storyphase.Controllers
 {
@@ -16,24 +17,41 @@ namespace Storyphase.Controllers
     {
         private readonly ApplicationDbContext _db;
 
+        [BindProperty]
+        public StoriesViewModel StoriesVM { get; set; }
+
         public HomeController(ApplicationDbContext db)
         {
             _db = db;
+            StoriesVM = new StoriesViewModel()
+            {
+                StoryTypes = _db.StoryTypes.ToList(),
+                SpecialTags = _db.SpecialTags.ToList(),
+                PrivacyTags = _db.PrivacyTags.ToList(),
+                Stories = new Stories(),
+                StoryBlocks = new List<StoryBlocks>(),
+                Comments = new List<Comments>()
+            };
         }
 
         public async Task<IActionResult> Index()
         {
-            var storyList = await _db.Stories.Include(m => m.StoryTypes).Include(m => m.SpecialTags).Include(m => m.PrivacyTags).ToListAsync();
+            var storyList = await _db.Stories.Include(m => m.StoryTypes)
+                            .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
+                            .Include(m => m.StoryBlocks).Include(m => m.Comments).ToListAsync();
 
             return View(storyList);
         }
 
+        // Get Details
         public async Task<IActionResult> Details(int id)
         {
 
-            var story = await _db.Stories.Include(m => m.StoryTypes).Include(m => m.SpecialTags).Include(m => m.PrivacyTags).Where(m=>m.Id == id).FirstOrDefaultAsync();
+            StoriesVM.Stories = await _db.Stories.Include(m => m.StoryTypes).Include(m => m.SpecialTags)
+                                .Include(m => m.PrivacyTags).Include(m => m.StoryBlocks).Include(m => m.Comments)
+                                .Where(m=>m.Id == id).FirstOrDefaultAsync();
 
-            return View(story);
+            return View(StoriesVM);
         }
 
         [HttpPost, ActionName("Details")]
@@ -66,6 +84,14 @@ namespace Storyphase.Controllers
             // set the session
             HttpContext.Session.Set("ssFavorite", lstFavorite);
             return RedirectToAction(nameof(Index));
+        }
+        
+        // Get StoryBlocks
+        public async Task<IActionResult> BlockShow(int? id)
+        {
+            var blocks = await _db.StoryBlocks.Where(b => b.StoriesId == id).ToListAsync();
+
+            return View(blocks);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

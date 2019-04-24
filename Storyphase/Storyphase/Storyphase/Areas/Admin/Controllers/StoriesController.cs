@@ -34,14 +34,18 @@ namespace Storyphase.Controllers
                 StoryTypes = _db.StoryTypes.ToList(),
                 SpecialTags = _db.SpecialTags.ToList(),
                 PrivacyTags = _db.PrivacyTags.ToList(),
-                Stories = new Stories()
+                Stories = new Stories(),
+                StoryBlocks = new List<StoryBlocks>(),
+                Comments = new List<Comments>()
             };
         }
 
         // GET: Stories
         public async Task<IActionResult> Index()
         {
-            var stories = _db.Stories.Include(m => m.StoryTypes).Include(m => m.SpecialTags).Include(m => m.PrivacyTags);
+            var stories = _db.Stories.Include(m => m.StoryTypes)
+                            .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
+                            .Include(m => m.StoryBlocks).Include(m => m.Comments);
             return View(await stories.ToListAsync());
         }
 
@@ -234,6 +238,14 @@ namespace Storyphase.Controllers
             {
                 return View();
             }
+        }
+
+        // Get StoryBlocks
+        public async Task<IActionResult> BlockShow(int? id)
+        {
+            var blocks = await _db.StoryBlocks.Where(b=>b.StoriesId == id).ToListAsync();
+
+            return View(blocks);
         }
     }
 }

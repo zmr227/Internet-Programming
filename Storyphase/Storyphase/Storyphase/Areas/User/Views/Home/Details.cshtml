@@ -1,4 +1,4 @@
-﻿@model Storyphase.Models.Stories
+﻿@model Storyphase.Models.ViewModels.StoriesViewModel
 @using Storyphase.Extensions
 @using Microsoft.AspNetCore.Http
 
@@ -14,18 +14,18 @@
             <br />
             <div class="form-group row">
                 <div class="col-4">
-                    <label asp-for="Title"></label>
+                    <label asp-for="Stories.Title"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Title" class="form-control" readonly />
+                    <input asp-for="Stories.Title" class="form-control" readonly />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-4">
-                    <label asp-for="Description"></label>
+                    <label asp-for="Stories.Description"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Description" class="form-control" readonly />
+                    <input asp-for="Stories.Description" class="form-control" readonly />
                 </div>
             </div>
 
@@ -34,11 +34,11 @@
                     <label asp-for="StoryTypes"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="StoryTypes.Name" class="form-control" readonly />
+                    <input asp-for="Stories.StoryTypes.Name" class="form-control" readonly />
                 </div>
             </div>
 
-            @if (Model.SpecialTags.Name != "--None--")
+            @if (Model.Stories.SpecialTags.Name != "--None--")
             {
                 <div class="form-group row">
 
@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="col-8">
-                        <input asp-for="SpecialTags.Name" class="form-control" readonly />
+                        <input asp-for="Stories.SpecialTags.Name" class="form-control" readonly />
                     </div>
 
                 </div>
@@ -58,7 +58,7 @@
                     <label asp-for="PrivacyTags"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="PrivacyTags.Name" class="form-control" readonly />
+                    <input asp-for="Stories.PrivacyTags.Name" class="form-control" readonly />
                 </div>
             </div>
             <div class="form-group row">
@@ -69,7 +69,7 @@
                     @{
                         bool isInFavorite = false;
                         List<int> lstFavorite = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite");
-                        if (lstFavorite != null && lstFavorite.Contains(Model.Id))
+                        if (lstFavorite != null && lstFavorite.Contains(Model.Stories.Id))
                         {
                             isInFavorite = true;
 
@@ -77,12 +77,12 @@
                     }
                     @if (isInFavorite)
                     {
-                        <button type="submit" value="Remove From Favorite" asp-action="Remove" asp-route-id="@Model.Id" class="btn btn-danger form-control">Remove From Favorite</button>
+                        <button type="submit" value="Remove From Favorite" asp-action="Remove" asp-route-id="@Model.Stories.Id" class="btn btn-danger form-control">Remove From Favorite</button>
 
                     }
                     else
                     {
-                        <button type="submit" value="Add to Favorite" asp-route-id="@Model.Id" class="btn btn-primary form-control">Add to Favorite</button>
+                        <button type="submit" value="Add to Favorite" asp-route-id="@Model.Stories.Id" class="btn btn-primary form-control">Add to Favorite</button>
                     }
                 </div>
             </div>
@@ -92,13 +92,14 @@
 
         </div>
         <div class="col-3">
-            <img src="@Model.Image" style="width:100%; border-radius:5px; border:1px solid #bbb9b9" class="align-items-center" />
+            <img src="@Model.Stories.Image" style="width:100%; border-radius:5px; border:1px solid #bbb9b9" class="align-items-center" />
         </div>
 
         <br />
         <div class="form-group">
-            <input hidden asp-for="Id" />
+            <input hidden asp-for="@Model.Stories.Id" />
             <a asp-action="Index" class="btn btn-success">Back to List</a>
+            <a asp-action="BlockShow" class="btn btn-primary" asp-route-id="@Model.Stories.Id">Show Story</a>
         </div>
     </div>
 </form>
