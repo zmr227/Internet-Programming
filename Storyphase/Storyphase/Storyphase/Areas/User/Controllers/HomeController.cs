@@ -95,7 +95,6 @@ namespace Storyphase.Controllers
         public async Task<IActionResult> BlockShow(int? id)
         {
             var blocks = await _db.StoryBlocks.Where(b => b.StoriesId == id).ToListAsync();
-
             return View(blocks);
         }
 

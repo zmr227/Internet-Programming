@@ -114,3 +114,16 @@ C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyp
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\obj\Debug\WpfApp.csproj.CopyComplete
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\obj\Debug\WpfApp.exe
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\obj\Debug\WpfApp.pdb
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.Helpers.dll
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.Mvc.dll
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.Razor.dll
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.WebPages.dll
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.Helpers.xml
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.Mvc.xml
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.Razor.xml
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.WebPages.xml
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\WpfApp\bin\Debug\System.Web.WebPages.Razor.xml
