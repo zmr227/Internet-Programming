@@ -1,9 +1,25 @@
 ﻿@model List<Storyphase.Models.StoryBlocks>
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#playButton').click(function () {
+            $('#playButton,#pauseButton').toggle();
+            $('#carouselControls').carousel('cycle');
+        });
+        $('#pauseButton').click(function () {
+            $('#playButton,#pauseButton').toggle();
+            $('#carouselControls').carousel('pause');
+        });
+    });
+</script>
 <br />
 
 <!--Carousel controls -->
-<div id="carouseControls" class="carousel slide" data-ride="carousel" data-interval="5000">
+<button id="pauseButton"><i class="fa fa-pause"></i></button>
+<button id="playButton" style="display:none;"><i class="fa fa-play"></i></button>
+
+<div id="carouselControls" class="carousel slide" data-ride="carousel" data-interval="2000">
+
 
     <div class="carousel-inner">
         @{
