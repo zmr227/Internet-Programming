@@ -32,6 +32,7 @@
             <th>
                 @Html.DisplayNameFor(m => m.CreateTime)
             </th>
+          
             <th></th>
             <th></th>
         </tr>
@@ -50,13 +51,14 @@
                 {
                     @Html.DisplayFor(m => item.SpecialTags.Name)
                 }
-                </td>
+            </td>
             <td>
                 @Html.DisplayFor(m => item.PrivacyTags.Name)
             </td>
             <td>
                 @Html.DisplayFor(m => item.CreateTime)
             </td>
+
             <td class="btn-group">
                 @await Html.PartialAsync("_TableButtonPartial", item.Id)
             </td>

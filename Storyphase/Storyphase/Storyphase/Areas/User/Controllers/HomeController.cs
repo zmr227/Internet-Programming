@@ -50,6 +50,11 @@ namespace Storyphase.Controllers
             StoriesVM.Stories = await _db.Stories.Include(m => m.StoryTypes).Include(m => m.SpecialTags)
                                 .Include(m => m.PrivacyTags).Include(m => m.StoryBlocks).Include(m => m.Comments)
                                 .Where(m=>m.Id == id).FirstOrDefaultAsync();
+            var comments = await _db.Comments.Where(m => m.StoriesId == id).ToListAsync();
+            for (int i = 0; i < comments.Count(); i++)
+            {
+                StoriesVM.Comments.Add(comments[i]);
+            }
 
             return View(StoriesVM);
         }

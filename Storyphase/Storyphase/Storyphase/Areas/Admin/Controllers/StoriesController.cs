@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ using Storyphase.Utility;
 
 namespace Storyphase.Controllers
 {
+    [Authorize(Roles = SD.AdminUser)]
     [Area("Admin")]
     public class StoriesController : Controller
     {
@@ -43,10 +45,11 @@ namespace Storyphase.Controllers
         // GET: Stories
         public async Task<IActionResult> Index()
         {
-            var stories = _db.Stories.Include(m => m.StoryTypes)
+            var storiesVM = await _db.Stories.Include(m => m.StoryTypes)
                             .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
-                            .Include(m => m.StoryBlocks).Include(m => m.Comments);
-            return View(await stories.ToListAsync());
+                            .Include(m => m.StoryBlocks).Include(m => m.Comments).ToListAsync();
+
+            return View(storiesVM);
         }
 
 
@@ -188,11 +191,21 @@ namespace Storyphase.Controllers
             }
 
             // receive the product info
-            StoriesVM.Stories = await _db.Stories.Include(m => m.SpecialTags).Include(m => m.StoryTypes).SingleOrDefaultAsync(m => m.Id == id);
+            StoriesVM.Stories = await _db.Stories.Include(m => m.SpecialTags)
+                                        .Include(m => m.StoryTypes)
+                                        .SingleOrDefaultAsync(m => m.Id == id);
+
             if (StoriesVM.Stories == null)
             {
                 return NotFound();
             }
+
+            var comments = await _db.Comments.Where(m => m.StoriesId == id).ToListAsync();
+            for (int i = 0; i < comments.Count(); i++)
+            {
+                StoriesVM.Comments.Add(comments[i]);
+            }
+
             return View(StoriesVM);
         }
 
@@ -243,9 +256,11 @@ namespace Storyphase.Controllers
         // Get StoryBlocks
         public async Task<IActionResult> BlockShow(int? id)
         {
-            var blocks = await _db.StoryBlocks.Where(b=>b.StoriesId == id).ToListAsync();
+            var blocks = await _db.StoryBlocks.Where(b => b.StoriesId == id).ToListAsync();
 
             return View(blocks);
         }
+
+
     }
 }
