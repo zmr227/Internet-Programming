@@ -1,0 +1,77 @@
+﻿@model Storyphase.Models.StoryBlocks
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+<h2 class="text-info">Edit Story Block</h2>
+<form method="post" enctype="multipart/form-data">
+    <div class="p-4 border rounded row">
+        <input hidden asp-for="StoryBlocksId" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Name" class="form-control" />
+                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Path"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Path" class="form-control" />
+                </div>
+                <span asp-validation-for="Path" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Content"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Content" class="form-control" />
+                </div>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Image"></label>
+                </div>
+                <div class="col-8">
+                    <input type="file" name="files" multiple class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="StoriesId" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="StoriesId" class="form-control" asp-items="ViewBag.StoriesId"></select>
+                </div>
+                <span asp-validation-for="StoriesId" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+            <img src="@Model.Image" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+        </div>
+    </div>
+
+
+    <br />
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Update" />
+        <a asp-action="Index" class="btn btn-success">Back to List</a>
+    </div>
+
+</form>
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

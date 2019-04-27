@@ -46,6 +46,5 @@ namespace WebAPI.Controllers
             return Ok(story);
         }
 
-
     }
 }
