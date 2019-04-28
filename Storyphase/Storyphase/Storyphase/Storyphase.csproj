@@ -14,6 +14,13 @@
     <CodeAnalysisRuleSet />
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="wwwroot\image\NewFolder\**" />
+    <Content Remove="wwwroot\image\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\image\NewFolder\**" />
+    <None Remove="wwwroot\image\NewFolder\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
@@ -30,12 +37,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Areas\User\Models\" />
-    <Folder Include="wwwroot\image\NewFolder\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <ProjectReference Include="..\WebAPI\WebAPI.csproj" />
   </ItemGroup>
 
 </Project>

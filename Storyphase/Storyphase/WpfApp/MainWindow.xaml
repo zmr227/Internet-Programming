@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="647.6">
+        Title="MainWindow" Height="549.3" Width="647.6">
     <Grid>
         <Button Content="Get Stories" HorizontalAlignment="Left" Margin="72,50,0,0" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.375,5.635" Height="28" Click="Button_Click">
             <Button.Style>
@@ -19,7 +19,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <TextBlock Name="txt1" HorizontalAlignment="Left" Margin="72,102,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="239" Width="468"/>
+        <TextBlock Name="txt1" HorizontalAlignment="Left" Margin="72,102,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="143" Width="389"/>
         
     </Grid>
 </Window>
