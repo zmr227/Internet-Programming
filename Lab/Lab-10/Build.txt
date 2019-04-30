@@ -26,3 +26,6 @@ If you have just downloaded this solution from the College Directory:
 5. At the Console prompt type update-database
 
 Now you will be able to run the project and add content.
+
+string path = Directory.GetParent(Directory.GetCurrentDirectory()).FullName; 
+                    var mvcPath = Path.Combine(path, "Storyphase/wwwroot/images", file.StoryBlocksId.ToString());

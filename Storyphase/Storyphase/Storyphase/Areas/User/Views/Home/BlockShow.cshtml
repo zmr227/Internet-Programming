@@ -1,6 +1,5 @@
 ﻿@model List<Storyphase.Models.StoryBlocks>
 
-
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -12,55 +11,109 @@
             $('#playButton,#pauseButton').toggle();
             $('#carouselControls').carousel('pause');
         });
+        $(".mCustomScrollbar").mCustomScrollbar({ axis: "x" });
     });
 </script>
 <br />
+<style>
+    #carouselControls {
+        margin: 30px;
+    }
+
+    .carousel-indicators {
+        top: -90px;
+    }
+
+        .carousel-indicators li, .carousel-indicators li.active {
+            position: relative;
+            left: 20px;
+            margin: 20px 36px !important;
+        }
+
+    .circle-btn {
+        position: relative;
+        padding: 0;
+        left: 0;
+        -webkit-box-shadow: 10px 6px 10px 0 rgba(0,0,0,0.3);
+        box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3);
+        border-radius: 50%;
+        height: 60px;
+        width: 60px;
+        transition: 0.2s;
+        font-size: larger;
+        text-align: center;
+        border: hidden;
+        background-color: #4CAF50;
+        color: white;
+    }
+
+        .circle-btn:hover {
+            cursor: pointer;
+            background-color: #26932b;
+            box-shadow: 0 8px 15px 0 rgba(0,0,0,0.3);
+        }
+
+</style>
+
+<button id="pauseButton" class="circle-btn"><i class="fa fa-pause"></i></button>
+<button id="playButton" style="display:none;" class="circle-btn"><i class="fa fa-play"></i></button>
 
 <!--Carousel controls -->
-<button id="pauseButton"><i class="fa fa-pause"></i></button>
-<button id="playButton" style="display:none;"><i class="fa fa-play"></i></button>
+<div class="container">
 
-<div id="carouselControls" class="carousel slide" data-ride="carousel" data-interval="2000">
+    <div id="carouselControls" class="carousel slide img-thumbnail" data-ride="carousel" data-interval="2000">
 
+        <div class="carousel-inner">
+            @{
+                var first = true;
+            }
+            @foreach (var item in @Model)
+            {
+                <div class="carousel-item @(first?Html.Raw("active"):Html.Raw(""))">
 
-    <div class="carousel-inner">
-        @{
-            var first = true;
-        }
-        @foreach (var item in @Model)
-        {
-            <div class="carousel-item @(first?Html.Raw("active"):Html.Raw(""))">
+                    <div class="card-title">
+                        <input asp-for="@item.Name" diabled class="form-control" />
+                    </div>
+                    <img class="d-block w-100" src="@item.Image" alt="@item.Name">
 
-                <div class="card-title">
-                    <input asp-for="@item.Name" diabled class="form-control" />
+                    <div class="tab-content">
+                        <input asp-for="@item.Content" diabled class="form-control" />
+                    </div>
                 </div>
-                <img class="d-block w-100" src="@item.Image" alt="@item.Name">
+                first = false;
 
-                <div class="tab-content">
-                    <input asp-for="@item.Content" diabled class="form-control" />
-                </div>
-            </div>
-            first = false;
-        }
+            }
+
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#carouselControls" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#carouselControls" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+        <!--
+            <a class="carousel-control-prev" href="#carouseControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouseControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        -->
+        <div class="">
+            <ol class='carousel-indicators'>
+                @for (var i = 0; i < Model.Count(); i++)
+                {
+                    <li data-target='#carouselControls' data-slide-to='@i' class="active">
+                        <img class="d-block" style="width: 100px;" src="@Model[i].Image">
+                    </li>
+                }
+            </ol>
+        </div>
     </div>
-
-    <!-- Left and right controls -->
-    <a class="carousel-control-prev" href="#carouselControls" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#carouselControls" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </a>
-    <!--
-        <a class="carousel-control-prev" href="#carouseControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouseControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    -->
 </div>
 @section Scripts {
 

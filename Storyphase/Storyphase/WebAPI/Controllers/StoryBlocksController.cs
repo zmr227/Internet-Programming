@@ -79,7 +79,7 @@ namespace WebAPI.Controllers
             _context.StoryBlocks.Add(storyBlocks);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetStoryBlocks", new { id = storyBlocks.StoryBlocksId }, storyBlocks);
+            return CreatedAtAction("GetStoryBlocks", new {storyBlocks.Name, storyBlocks.Content, storyBlocks.Path, storyBlocks.Image}, storyBlocks);
         }
 
         // DELETE: api/StoryBlocks/5
