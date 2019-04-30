@@ -8,7 +8,7 @@ namespace Storyphase.Utility
     public class SD
     {
         public const string DefaultStoryImage = "default_image.png";
-        public const string ImageFolder = @"image\StoryImage";
+        public const string ImageFolder = @"images\StoryImage";
         public const string StoryFolder = @"Stories";
 
         public const string AdminUser = "Admin";

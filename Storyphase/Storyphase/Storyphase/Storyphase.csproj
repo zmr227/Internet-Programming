@@ -15,10 +15,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\image\NewFolder\**" />
-    <Content Remove="wwwroot\image\NewFolder\**" />
-    <EmbeddedResource Remove="wwwroot\image\NewFolder\**" />
-    <None Remove="wwwroot\image\NewFolder\**" />
+    <Compile Remove="wwwroot\images\NewFolder\**" />
+    <Content Remove="wwwroot\images\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\images\NewFolder\**" />
+    <None Remove="wwwroot\images\NewFolder\**" />
   </ItemGroup>
 
 

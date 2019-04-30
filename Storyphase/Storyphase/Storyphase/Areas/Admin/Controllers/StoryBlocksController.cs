@@ -162,6 +162,7 @@ namespace Storyphase.Areas.Admin.Controllers
                 storyFromDb.Name = storyBlock.Name;
                 storyFromDb.Content = storyBlock.Content;
                 storyFromDb.Path = storyBlock.Path;
+                storyFromDb.StoriesId = storyBlock.StoriesId;
 
                 await _context.SaveChangesAsync();
 

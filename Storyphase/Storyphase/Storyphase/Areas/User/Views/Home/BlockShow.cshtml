@@ -1,5 +1,8 @@
 ﻿@model List<Storyphase.Models.StoryBlocks>
+@using Storyphase.Utility
 
+<link href="~/css/jquery-ui.css" rel="stylesheet" />
+<script src="~/js/jquery-ui.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -53,7 +56,42 @@
             box-shadow: 0 8px 15px 0 rgba(0,0,0,0.3);
         }
 
+    .list-group-horizontal .list-group-item {
+        display: inline-block;
+        border:hidden;
+    }
+
+    .list-group-horizontal .list-group-item {
+        margin-bottom: 0;
+        margin-left: -4px;
+        margin-right: 0;
+    }
+
+      
 </style>
+
+@if (User.IsInRole(SD.AdminUser))
+{
+    <div class="">
+        <ul id="SortableGallery" class="list-group">
+            <li class="list-group-item" style="border:hidden">
+                <h4>Blocks of Current Story</h4>
+            </li>
+            </ul>
+        <ul class="list-group-horizontal" style="padding-inline-start: 5px;">
+            @foreach (var item in @Model)
+            {
+            <li class="list-group-item col-md-3">
+                <div style="float: left;">
+                    <label asp-for="@item.StoryBlocksId">@item.Name</label>
+                    <img class="img-fluid" src="@item.Image" />
+                </div> 
+            </li>
+               
+            }
+        </ul>
+    </div>
+}
 
 <button id="pauseButton" class="circle-btn"><i class="fa fa-pause"></i></button>
 <button id="playButton" style="display:none;" class="circle-btn"><i class="fa fa-play"></i></button>
