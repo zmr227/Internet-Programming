@@ -1,9 +1,10 @@
 ﻿@model List<Storyphase.Models.StoryBlocks>
 @using Storyphase.Utility
 
-<link href="~/css/jquery-ui.css" rel="stylesheet" />
-<script src="~/js/jquery-ui.js"></script>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/jquery-ui.js"></script>
+<link href="~/css/jquery-ui.css" rel="stylesheet" />
 <script>
     $(document).ready(function () {
         $('#playButton').click(function () {
@@ -14,7 +15,8 @@
             $('#playButton,#pauseButton').toggle();
             $('#carouselControls').carousel('pause');
         });
-        $(".mCustomScrollbar").mCustomScrollbar({ axis: "x" });
+
+        $("#SortableGallery").sortable();
     });
 </script>
 <br />
@@ -58,7 +60,7 @@
 
     .list-group-horizontal .list-group-item {
         display: inline-block;
-        border:hidden;
+        border: hidden;
     }
 
     .list-group-horizontal .list-group-item {
@@ -66,28 +68,30 @@
         margin-left: -4px;
         margin-right: 0;
     }
-
-      
 </style>
 
 @if (User.IsInRole(SD.AdminUser))
 {
     <div class="">
-        <ul id="SortableGallery" class="list-group">
+        <ul class="list-group">
             <li class="list-group-item" style="border:hidden">
                 <h4>Blocks of Current Story</h4>
+                <div class="text-right">
+                    <a asp-action="UpdateOrder" class="btn btn-info"><i class="fas fa-save"></i>&nbsp; Save Order</a>
+                </div>
             </li>
-            </ul>
-        <ul class="list-group-horizontal" style="padding-inline-start: 5px;">
+        </ul>
+       
+        <ul id="SortableGallery" class="list-group-horizontal" style="padding-inline-start: 5px;">
             @foreach (var item in @Model)
             {
-            <li class="list-group-item col-md-3">
-                <div style="float: left;">
-                    <label asp-for="@item.StoryBlocksId">@item.Name</label>
-                    <img class="img-fluid" src="@item.Image" />
-                </div> 
-            </li>
-               
+                <li class="list-group-item col-md-3">
+                    <div style="float: left;">
+                        <label asp-for="@item.StoryBlocksId">@item.Name</label>
+                        <img class="img-fluid" src="@item.Image" />
+                    </div>
+                </li>
+
             }
         </ul>
     </div>
