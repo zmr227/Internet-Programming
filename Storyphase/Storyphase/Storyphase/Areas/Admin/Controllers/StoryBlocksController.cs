@@ -44,6 +44,7 @@ namespace Storyphase.Areas.Admin.Controllers
             var storyBlocks = await _context.StoryBlocks
                 .Include(s => s.Stories)
                 .FirstOrDefaultAsync(m => m.StoryBlocksId == id);
+            
             if (storyBlocks == null)
             {
                 return NotFound();
@@ -66,7 +67,12 @@ namespace Storyphase.Areas.Admin.Controllers
         {
             try
             {
-                _context.Add(storyBlock);
+                // set its position as the last block
+                var story = _context.Stories.Where(x=>x.Id == storyBlock.StoriesId).FirstOrDefault();
+                story.BlockNumber++;
+                storyBlock.Position = story.BlockNumber;
+
+                _context.StoryBlocks.Add(storyBlock);
                 await _context.SaveChangesAsync();
 
                 string webRootPath = _hostingEnvironment.WebRootPath;
@@ -208,6 +214,37 @@ namespace Storyphase.Areas.Admin.Controllers
         private bool StoryBlocksExists(long id)
         {
             return _context.StoryBlocks.Any(e => e.StoryBlocksId == id);
+        }
+
+        public ActionResult UpdateItem(string itemIds)
+        {
+            int count = 1;
+            List<int> itemIdList = new List<int>();
+            itemIdList = itemIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+            foreach(var itemId in itemIdList)
+            {
+                try
+                {
+                    StoryBlocks block = _context.StoryBlocks.Where(x => x.StoryBlocksId == itemId).FirstOrDefault();
+                    block.Position = count;
+                    if(block == null)
+                    {
+                        _context.StoryBlocks.Add(block);
+                    }
+                    else
+                    {
+                        _context.StoryBlocks.Update(block);
+                    }
+                    _context.SaveChangesAsync();
+
+                }
+                catch(Exception)
+                {
+                    continue;
+                }
+                count++;
+            }
+            return new JsonResult(true);
         }
     }
 }

@@ -42,6 +42,8 @@ namespace Storyphase.Models
         [ForeignKey("PrivacyTagId")]
         public virtual PrivacyTags PrivacyTags { get; set; }
 
+        public int BlockNumber { get; set; }
+
         public virtual ICollection<Comments> Comments { get; set; }
         public virtual ICollection<StoryBlocks> StoryBlocks { get; set; }
     }
@@ -53,6 +55,8 @@ namespace Storyphase.Models
         public string Path { get; set; }
         public string Content { get; set; }
         public string Image { get; set; }
+
+        public int Position { get; set; }
 
         public int? StoriesId { get; set; }
         [ForeignKey("StoriesId")]

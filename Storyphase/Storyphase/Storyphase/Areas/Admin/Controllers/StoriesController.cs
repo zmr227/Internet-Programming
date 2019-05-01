@@ -256,9 +256,10 @@ namespace Storyphase.Controllers
         // Get StoryBlocks
         public async Task<IActionResult> BlockShow(int? id)
         {
-            var blocks = await _db.StoryBlocks.Where(b => b.StoriesId == id).ToListAsync();
+            var blocks = _db.StoryBlocks.Where(b => b.StoriesId == id);
+            var blocklist = await blocks.OrderBy(b=>b.Position).ToListAsync();
 
-            return View(blocks);
+            return View(blocklist);
         }
 
 

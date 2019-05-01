@@ -49,7 +49,7 @@ namespace Storyphase.Controllers
 
             StoriesVM.Stories = await _db.Stories.Include(m => m.StoryTypes).Include(m => m.SpecialTags)
                                 .Include(m => m.PrivacyTags).Include(m => m.StoryBlocks).Include(m => m.Comments)
-                                .Where(m=>m.Id == id).FirstOrDefaultAsync();
+                                .Where(m => m.Id == id).FirstOrDefaultAsync();
             var comments = await _db.Comments.Where(m => m.StoriesId == id).ToListAsync();
             for (int i = 0; i < comments.Count(); i++)
             {
@@ -64,7 +64,7 @@ namespace Storyphase.Controllers
         public async Task<IActionResult> DetailsPost(int id)
         {
             List<int> lstFavorite = HttpContext.Session.Get<List<int>>("ssFavorite");
-            if(lstFavorite == null)
+            if (lstFavorite == null)
             {
                 lstFavorite = new List<int>();
             }
@@ -90,14 +90,34 @@ namespace Storyphase.Controllers
             HttpContext.Session.Set("ssFavorite", lstFavorite);
             return RedirectToAction(nameof(Index));
         }
-        
+
         // Get StoryBlocks
         public async Task<IActionResult> BlockShow(int? id)
         {
-            var blocks = await _db.StoryBlocks.Where(b => b.StoriesId == id).ToListAsync();
-            return View(blocks);
-        }
+            var blocks = _db.StoryBlocks.Where(b => b.StoriesId == id);
+            var blocklist = await blocks.OrderBy(b => b.Position).ToListAsync();
 
+            return View(blocklist);
+        }
+        public JsonResult UpdateItem(string itemIds)
+        {
+            int count = 1;
+            List<int> itemIdList = new List<int>();
+            itemIdList = itemIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+            foreach (var itemId in itemIdList)
+            {
+
+                StoryBlocks block = _db.StoryBlocks.Where(x => x.StoryBlocksId == itemId).FirstOrDefault();
+                block.Position = count;
+                if (ModelState.IsValid)
+                {
+                    _db.Update(block);
+                    _db.SaveChanges();
+                    count++;
+                }
+            }
+            return Json(true);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
