@@ -218,7 +218,11 @@ namespace Storyphase.Controllers
             }
 
             // receive the product info
-            StoriesVM.Stories = await _db.Stories.Include(m => m.SpecialTags).Include(m => m.StoryTypes).SingleOrDefaultAsync(m => m.Id == id);
+            StoriesVM.Stories = await _db.Stories.Include(m => m.SpecialTags)
+                                        .Include(m => m.StoryTypes)
+                                        .Include(m => m.Comments)
+                                        .Include(m => m.StoryBlocks)
+                                        .SingleOrDefaultAsync(m => m.Id == id);
             if (StoriesVM.Stories == null)
             {
                 return NotFound();
@@ -235,6 +239,29 @@ namespace Storyphase.Controllers
             {
                 string webRootPath = _hostingEnvironment.WebRootPath;
                 Stories stories = await _db.Stories.FindAsync(id);
+
+                // delete blocks
+                var block_imgs = Path.Combine(webRootPath, SD.StoryFolder + @"\" + stories.Id);
+                Directory.Delete(block_imgs, true);
+
+                var blocks = _db.StoryBlocks.Where(b => b.StoriesId == id).ToList();
+                if (blocks != null)
+                {
+                    foreach (var item in blocks)
+                    {
+                        _db.StoryBlocks.Remove(item);
+                    }
+                }
+                // delete comments
+                var comments = _db.Comments.Where(c => c.StoriesId == id);
+                if (comments != null)
+                {
+                    foreach(var item in comments)
+                    {
+                        _db.Comments.Remove(item);
+                    }
+                }
+                // delete story
                 var uploads = Path.Combine(webRootPath, SD.ImageFolder);
                 var extension = Path.GetExtension(stories.Image);
 
@@ -242,6 +269,7 @@ namespace Storyphase.Controllers
                 {
                     System.IO.File.Delete(Path.Combine(uploads, stories.Id + extension));
                 }
+
                 _db.Stories.Remove(stories);
                 await _db.SaveChangesAsync();
 
@@ -257,7 +285,7 @@ namespace Storyphase.Controllers
         public async Task<IActionResult> BlockShow(int? id)
         {
             var blocks = _db.StoryBlocks.Where(b => b.StoriesId == id);
-            var blocklist = await blocks.OrderBy(b=>b.Position).ToListAsync();
+            var blocklist = await blocks.OrderBy(b => b.Position).ToListAsync();
 
             return View(blocklist);
         }

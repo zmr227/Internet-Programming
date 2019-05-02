@@ -57,7 +57,10 @@ namespace Storyphase.Controllers
                 foreach (var item in favoriteStories)
                 {
                     var id = item.StoryId;
-                    lstFavorite.Add(id);
+                    if (!lstFavorite.Contains(id))
+                    {
+                        lstFavorite.Add(id);
+                    }
                 }
             }
 
@@ -92,7 +95,10 @@ namespace Storyphase.Controllers
             {
                 lstFavorite = new List<int>();
             }
-            lstFavorite.Add(id);
+            if (!lstFavorite.Contains(id))
+            {
+                lstFavorite.Add(id);
+            }
             // set the session
             HttpContext.Session.Set("ssFavorite", lstFavorite);
 
