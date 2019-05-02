@@ -43,13 +43,16 @@
                             <a class="nav-link text-white-50" asp-area="User" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white-50" asp-area="Admin" asp-controller="Stories" asp-action="Index">Stories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white-50" asp-area="Admin" asp-controller="StoryBlocks" asp-action="Index">Story Blocks</a>
+                            <a class="nav-link text-white-50" asp-area="User" asp-controller="Home" asp-action="Index">Category</a>
                         </li>
                         @if (User.IsInRole(SD.AdminUser))
                         {
+                            <li class="nav-item">
+                                <a class="nav-link text-white-50" asp-area="Admin" asp-controller="Stories" asp-action="Index">Stories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white-50" asp-area="Admin" asp-controller="StoryBlocks" asp-action="Index">Story Blocks</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white-50" asp-area="Admin" asp-controller="StoryTypes" asp-action="Index">Story Types</a>
                             </li>
@@ -64,27 +67,29 @@
                                 <a class="nav-link text-white-50" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin Users</a>
                             </li>
                         }
-
-                        @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite") != null)
+                        @if (User.IsInRole(SD.AdminUser) || User.IsInRole(SD.User))
                         {
-                            <li style="color: white">
-                                <a asp-area="User" asp-controller="Favorite" asp-action="Index" class="nav-link">
-                                    <i class="fas fa-heart"></i> &nbsp;
-                                    @{
-                                        var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite").Count;
-                                    }
-                                    (@count)
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li style="color: white">
-                                <a asp-area="User" asp-controller="Favorite" asp-action="Index" class="nav-link">
-                                    <i class="fas fa-heart"></i> &nbsp;
-                                    (0)
-                                </a>
-                            </li>
+                            @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite") != null)
+                            {
+                                <li style="color: white">
+                                    <a asp-area="User" asp-controller="Favorite" asp-action="Index" class="nav-link">
+                                        <i class="fas fa-heart"></i> &nbsp;
+                                        @{
+                                            var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite").Count;
+                                        }
+                                        (@count)
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li style="color: white">
+                                    <a asp-area="User" asp-controller="Favorite" asp-action="Index" class="nav-link">
+                                        <i class="fas fa-heart"></i> &nbsp;
+                                        (0)
+                                    </a>
+                                </li>
+                            }
                         }
                     </ul>
                 </div>

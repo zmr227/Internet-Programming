@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Storyphase.Data;
@@ -16,13 +17,15 @@ namespace Storyphase.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly UserManager<IdentityUser> _userManager;
 
         [BindProperty]
         public StoriesViewModel StoriesVM { get; set; }
 
-        public HomeController(ApplicationDbContext db)
+        public HomeController(ApplicationDbContext db, UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
             StoriesVM = new StoriesViewModel()
             {
                 StoryTypes = _db.StoryTypes.ToList(),
@@ -39,6 +42,27 @@ namespace Storyphase.Controllers
             var storyList = await _db.Stories.Include(m => m.StoryTypes)
                             .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
                             .Include(m => m.StoryBlocks).Include(m => m.Comments).ToListAsync();
+
+            // load current user's favorite stories' ids to session
+            List<int> lstFavorite = HttpContext.Session.Get<List<int>>("ssFavorite");
+            if (lstFavorite == null)
+            {
+                lstFavorite = new List<int>();
+            }
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var favoriteStories = _db.StoriesAddToFavorites.Where(s => s.UserId == userId).ToList();
+
+            if (favoriteStories != null && favoriteStories.Count > 0)
+            {
+                foreach (var item in favoriteStories)
+                {
+                    var id = item.StoryId;
+                    lstFavorite.Add(id);
+                }
+            }
+
+            // set the session
+            HttpContext.Session.Set("ssFavorite", lstFavorite);
 
             return View(storyList);
         }

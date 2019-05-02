@@ -13,5 +13,10 @@ namespace Storyphase.Models
 
         [ForeignKey("StoryId")]
         public virtual Stories Stories { get; set; }
+
+        public string UserId { get; set; }
+        
+        [ForeignKey("UserId")]
+        public virtual ApplicationUsers Users { get; set; }
     }
 }
