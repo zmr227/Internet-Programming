@@ -88,6 +88,18 @@
     #Blocks:hover{
         background-color: aliceblue;
     }
+    .img-fluid {
+        width: 100%;
+        max-height: 132.5px !important;
+    }
+    .d-block {
+        width: 100%;
+        max-height: 56px !important;
+    }
+    .w-100 {
+        width: 100%;
+        max-height: 560px !important;
+    }
 </style>
 
 @if (User.IsInRole(SD.AdminUser))
@@ -108,7 +120,7 @@
                 <li id="Blocks"class="list-group-item col-md-3">
                     <div style="float: left;">
                         <p class="taskInline" id="task@(item.StoryBlocksId)" data-taskid="@item.StoryBlocksId">@item.Name</p>
-                        <img class="img-fluid" src="@item.Image" />
+                        <img class="img-fluid" src="@item.Image"/>
                         <h5>@item.Position</h5>
                     </div>
                 </li>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -42,7 +43,7 @@ namespace Storyphase.Controllers
             var storyList = await _db.Stories.Include(m => m.StoryTypes)
                             .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
                             .Include(m => m.StoryBlocks).Include(m => m.Comments).ToListAsync();
-
+            
             // load current user's favorite stories' ids to session
             List<int> lstFavorite = HttpContext.Session.Get<List<int>>("ssFavorite");
             if (lstFavorite == null)
@@ -148,6 +149,24 @@ namespace Storyphase.Controllers
             }
             return Json(true);
         }
+
+        public static Bitmap ResizeImage(Bitmap bmp, int newW, int newH)
+        {
+            try
+            {
+                Bitmap bap = new Bitmap(newW, newH);
+                Graphics g = Graphics.FromImage(bap);
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(bap, new Rectangle(0, 0, newW, newH), new Rectangle(0, 0, bap.Width, bap.Height), GraphicsUnit.Pixel);
+                g.Dispose();
+                return bap;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

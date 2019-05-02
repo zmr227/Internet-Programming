@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -88,7 +89,8 @@ namespace Storyphase.Controllers
 
                     using (var filestream = new FileStream(Path.Combine(uploads, StoriesVM.Stories.Id + extension), FileMode.Create))
                     {
-                        files[0].CopyTo(filestream);
+                       files[0].CopyTo(filestream);
+                        
                     }
                     storyFromDb.Image = @"\" + SD.ImageFolder + @"\" + StoriesVM.Stories.Id + extension;
                 }
@@ -290,6 +292,7 @@ namespace Storyphase.Controllers
             return View(blocklist);
         }
 
+       
 
-    }
+}
 }
