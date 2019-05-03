@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Storyphase.Data;
@@ -32,6 +33,7 @@ namespace Storyphase.Controllers
         {
             _db = db;
             _hostingEnvironment = hostingEnvironment;
+            
             StoriesVM = new StoriesViewModel()
             {
                 StoryTypes = _db.StoryTypes.ToList(),
@@ -292,7 +294,6 @@ namespace Storyphase.Controllers
             return View(blocklist);
         }
 
-       
-
-}
+        
+    }
 }

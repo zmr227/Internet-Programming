@@ -130,6 +130,8 @@ namespace Storyphase.Controllers
 
             return View(blocklist);
         }
+
+        // Save new order of StoryBlocks to db
         public JsonResult UpdateItem(string itemIds)
         {
             int count = 1;
@@ -150,23 +152,68 @@ namespace Storyphase.Controllers
             return Json(true);
         }
 
-        public static Bitmap ResizeImage(Bitmap bmp, int newW, int newH)
+        // Comments Operation
+        // GET Create Action Method
+        public IActionResult AddComment()
         {
-            try
+            return View();
+        }
+        // POST Create Action Method
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddComment(int id, Comments comment)
+        {
+            if (ModelState.IsValid)
             {
-                Bitmap bap = new Bitmap(newW, newH);
-                Graphics g = Graphics.FromImage(bap);
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                g.DrawImage(bap, new Rectangle(0, 0, newW, newH), new Rectangle(0, 0, bap.Width, bap.Height), GraphicsUnit.Pixel);
-                g.Dispose();
-                return bap;
+                var userId = _userManager.GetUserId(HttpContext.User);
+                var userName = _db.ApplicationUsers.Where(u => u.Id == userId).FirstOrDefault().Name;
+
+                Comments comments = new Comments
+                {
+                    Content = comment.Content,
+                    UserName = userName,
+                    StoriesId = id
+                };
+
+                _db.Comments.Add(comments);
+
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Details), new { id = StoriesVM.Stories.Id });
             }
-            catch
-            {
-                return null;
-            }
+
+            return View(comment);
         }
 
+        //GET Delete Action Method
+        public async Task<IActionResult> DeleteComment(long? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var comment = await _db.Comments.FindAsync(id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            return View(comment);
+        }
+
+        //POST Delete action Method
+        [HttpPost] 
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteComment(long id)
+        {
+            var comment = await _db.Comments.FindAsync(id);
+            _db.Comments.Remove(comment);
+
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Details), new { id = StoriesVM.Stories.Id } );
+        }
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

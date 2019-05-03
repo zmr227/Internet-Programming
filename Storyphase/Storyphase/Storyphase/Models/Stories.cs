@@ -71,7 +71,10 @@ namespace Storyphase.Models
         public string Content { get; set; }
 
         public int? StoriesId { get; set; }
+
         [ForeignKey("StoriesId")]
         public Stories Stories { get; set; }
+
+        public string UserName { get; set; }
     }
 }

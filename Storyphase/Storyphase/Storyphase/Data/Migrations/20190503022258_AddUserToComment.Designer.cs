@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Storyphase.Data;
 
 namespace Storyphase.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190503022258_AddUserToComment")]
+    partial class AddUserToComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,11 +198,13 @@ namespace Storyphase.Migrations
 
                     b.Property<int?>("StoriesId");
 
-                    b.Property<string>("UserName");
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("StoriesId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -387,6 +391,10 @@ namespace Storyphase.Migrations
                     b.HasOne("Storyphase.Models.Stories", "Stories")
                         .WithMany("Comments")
                         .HasForeignKey("StoriesId");
+
+                    b.HasOne("Storyphase.Models.ApplicationUsers", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Storyphase.Models.Stories", b =>
