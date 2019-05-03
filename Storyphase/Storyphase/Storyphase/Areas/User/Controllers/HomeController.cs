@@ -167,19 +167,19 @@ namespace Storyphase.Controllers
             {
                 var userId = _userManager.GetUserId(HttpContext.User);
                 var userName = _db.ApplicationUsers.Where(u => u.Id == userId).FirstOrDefault().Name;
-
+               
                 Comments comments = new Comments
                 {
+                    StoriesId = id,
                     Content = comment.Content,
-                    UserName = userName,
-                    StoriesId = id
+                    UserName = userName
                 };
 
                 _db.Comments.Add(comments);
 
                 await _db.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Details), new { id = StoriesVM.Stories.Id });
+                return RedirectToAction(nameof(Index));
             }
 
             return View(comment);

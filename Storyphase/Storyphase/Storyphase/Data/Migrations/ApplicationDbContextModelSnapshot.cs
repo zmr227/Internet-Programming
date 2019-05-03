@@ -194,6 +194,8 @@ namespace Storyphase.Migrations
                     b.Property<string>("Content")
                         .IsRequired();
 
+                    b.Property<string>("Email");
+
                     b.Property<int?>("StoriesId");
 
                     b.Property<string>("UserName");

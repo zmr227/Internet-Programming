@@ -116,11 +116,11 @@
             {
                 @Html.HiddenFor(m => m.Comments[i].UserName)
                 <tr>
-                    <td>@Html.DisplayFor(m => m.Comments[i].UserName)</td>
+                    <td>@Html.DisplayFor(m => m.Comments[i].UserName) : @Html.DisplayFor(m => m.Comments[i].Content)</td>
                 </tr>
                 @Html.HiddenFor(m => m.Comments[i].Content)
                 <tr>
-                    <td>@Html.DisplayFor(m => m.Comments[i].Content)</td>
+                    <td></td>
                     <td>
                         @if (User.IsInRole(SD.AdminUser))
                         {
