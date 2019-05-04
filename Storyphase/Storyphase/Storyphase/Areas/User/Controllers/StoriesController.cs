@@ -172,7 +172,8 @@ namespace Storyphase.Areas.User.Controllers
                 {
                     StoriesId = id,
                     Content = comment.Content,
-                    UserName = userName
+                    UserName = userName,
+                    CreateTime = DateTime.Now
                 };
 
                 _db.Comments.Add(comments);

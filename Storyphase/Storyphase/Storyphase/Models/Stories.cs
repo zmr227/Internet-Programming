@@ -76,5 +76,8 @@ namespace Storyphase.Models
         public Stories Stories { get; set; }
 
         public string UserName { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime CreateTime { get; set; }
     }
 }
