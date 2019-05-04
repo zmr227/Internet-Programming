@@ -19,7 +19,7 @@ namespace Storyphase.Controllers
 {
     [Authorize(Roles = SD.AdminUser)]
     [Area("Admin")]
-    public class StoriesController : Controller
+    public class StoriesListController : Controller
     {
         private readonly ApplicationDbContext _db;
 
@@ -29,7 +29,7 @@ namespace Storyphase.Controllers
         public StoriesViewModel StoriesVM { get; set; }
 
         // initialize the constructor
-        public StoriesController(ApplicationDbContext db, HostingEnvironment hostingEnvironment)
+        public StoriesListController(ApplicationDbContext db, HostingEnvironment hostingEnvironment)
         {
             _db = db;
             _hostingEnvironment = hostingEnvironment;

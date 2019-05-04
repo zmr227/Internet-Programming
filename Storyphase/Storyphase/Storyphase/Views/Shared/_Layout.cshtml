@@ -43,12 +43,12 @@
                             <a class="nav-link text-white-50" asp-area="User" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white-50" asp-area="User" asp-controller="Home" asp-action="Index">Category</a>
+                            <a class="nav-link text-white-50" asp-area="User" asp-controller="Stories" asp-action="Index">Stories</a>
                         </li>
                         @if (User.IsInRole(SD.AdminUser))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-white-50" asp-area="Admin" asp-controller="Stories" asp-action="Index">Stories</a>
+                                <a class="nav-link text-white-50" asp-area="Admin" asp-controller="StoriesList" asp-action="Index">Stories List</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white-50" asp-area="Admin" asp-controller="StoryBlocks" asp-action="Index">Story Blocks</a>
@@ -64,7 +64,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-white-50" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin Users</a>
+                                <a class="nav-link text-white-50" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Users</a>
                             </li>
                         }
                         @if (User.IsInRole(SD.AdminUser) || User.IsInRole(SD.User))
