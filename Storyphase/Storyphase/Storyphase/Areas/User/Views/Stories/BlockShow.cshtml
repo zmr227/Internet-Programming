@@ -24,7 +24,7 @@
                     itemIds = itemIds + itemId + ",";
                 });
                 $.ajax({
-                    url: '@this.Url.Action("UpdateItem", "Home")',
+                    url: '@this.Url.Action("UpdateItem", "Stories")',
                     data: { itemIds: itemIds },
                     type: 'POST',
                     success: function (data) {
@@ -109,7 +109,7 @@
             <li class="list-group-item" style="border:hidden">
                 <h4>Blocks of Current Story</h4>
                 <div class="text-right">
-                    <a class="btn btn-info" href="@Url.Action("Index", "Home")"><i class="fas fa-check-circle"></i>&nbsp; Back to List</a>
+                    <a class="btn btn-info" href="@Url.Action("Index", "Stories")"><i class="fas fa-check-circle"></i>&nbsp; Back to List</a>
                 </div>
             </li>
         </ul>
