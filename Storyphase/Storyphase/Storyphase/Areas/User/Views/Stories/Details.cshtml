@@ -114,34 +114,37 @@
             <a asp-action="AddComment" asp-route-id="@Model.Stories.Id" class="btn btn-outline-info float-right"><i class="fas fa-plus"></i>&nbsp; Add New Comment</a>
         }
         <h3>Comments</h3>
-        <section class="comments">
 
-            @for (int i = 0; i < Model.Comments.Count(); i++)
-            {
-               
-            <article class="comment">
-                <a class="comment-img" href="#non">
-                    <img class="avatar" src="~/images/default-avatar.jpg" alt=""   />
-                </a>
-                @if (User.IsInRole(SD.AdminUser))
+        @if (Model.Comments.Count() > 0)
+        {
+            <section class="comments">
+
+                @for (int i = 0; i < Model.Comments.Count(); i++)
                 {
-                    <a asp-action="DeleteComment" asp-route-id="@Model.Comments[i].Id" id="delete-btn" class="btn btn-outline-danger float-right">
-                        <i class="fas fa-trash"></i>
-                    </a>
+                    <article class="comment">
+                        <a class="comment-img" href="#non">
+                            <img class="avatar" src="~/images/default-avatar.jpg" alt="" />
+                        </a>
+                        @if (User.IsInRole(SD.AdminUser))
+                        {
+                            <a asp-action="DeleteComment" asp-route-id="@Model.Comments[i].Id" class="btn btn-outline-danger float-right">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        }
+                        <div class="comment-body">
+                            <div class="text" style="width:80%">
+                                <p> @Model.Comments[i].Content</p>
+                            </div>
+                            <p class="attribution">by <a href="#non">@Model.Comments[i].UserName </a> at @Model.Comments[i].CreateTime</p>
+                        </div>
+                    </article>
                 }
-
-                <div class="comment-body">
-                    <div class="text" style="width:80%">
-                        <p> @Model.Comments[i].Content</p>
-                    </div>
-                    <p class="attribution">by <a href="#non">@Model.Comments[i].UserName </a> at @Model.Comments[i].CreateTime</p>
-
-                </div>
-
-            </article>
-            }
-        </section>
-        
+            </section>
+        }
+        else
+        {
+            <section> No Comments yet...</section>
+        }
     </div>
 </form>
 

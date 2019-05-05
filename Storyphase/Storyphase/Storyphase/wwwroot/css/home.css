@@ -12,33 +12,38 @@
     display: inline;
 }
 
-.jumbotron {
+.home-img {
     margin-top: 40px;
     background-position: center;
-    background-image: url('../images/StoryImage/10.png');
-    background-repeat: no-repeat;
+    background-image: url('../images/home-img1.jpg');
+    background-size:cover;
     height: 550px;
+    border-radius: 8px;
 }
 
-    .jumbotron .container {
-        position: relative;
-        top: 100px;
-    }
+.home-img .container {
+    position: relative;
+    top: 100px;
+    padding-left: 50px;
+    padding-top: 70px;
+}
 
-    .jumbotron h1 {
+    .home-img h1 {
         color: #fff;
         font-size: 48px;
         font-family: 'Shift', sans-serif;
         font-weight: bold;
     }
 
-    .jumbotron p {
+    .home-img p {
         font-size: 20px;
         color: #fff;
     }
 
 .learn-more {
-    background-color: #f7f7f7;
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
 }
 
     .learn-more h3 {
@@ -49,6 +54,11 @@
 
     .learn-more a {
         color: #00b0ff;
+    }
+    .learn-more .col-md-4 {
+        padding-top: 15px;
+        padding-bottom: 5px;
+
     }
 
 .neighborhood-guides {

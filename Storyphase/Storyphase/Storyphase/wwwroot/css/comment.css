@@ -9,12 +9,12 @@ a {
 }
 
 body {
-   
+    background-color: whitesmoke;
 }
 
 section {
-    background-color: aliceblue;
-    padding:24px;
+    background-color: #D3E8E1;
+    padding: 24px;
     margin: auto;
     margin-top: 20px;
     border-radius: 5px;
@@ -48,7 +48,7 @@ section {
 .comment .text {
     padding: 10px;
     border: 1px solid #e5e5e5;
-    border-radius: 5px;
+    border-radius: 8px;
     background: #fff;
 }
 

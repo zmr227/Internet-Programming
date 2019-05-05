@@ -180,7 +180,7 @@ namespace Storyphase.Areas.User.Controllers
 
                 await _db.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = id });
             }
 
             return View(comment);
@@ -209,10 +209,11 @@ namespace Storyphase.Areas.User.Controllers
         public async Task<IActionResult> DeleteComment(long id)
         {
             var comment = await _db.Comments.FindAsync(id);
+            var storyId = comment.StoriesId;
             _db.Comments.Remove(comment);
 
             await _db.SaveChangesAsync();
-            return RedirectToAction(nameof(Details), new { id = StoriesVM.Stories.Id });
+            return RedirectToAction("Details", "Stories", new { id = storyId });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
