@@ -1,9 +1,4 @@
-﻿///////////////////////////////////////////////////////////////
-// FilesController.cs - Web Api for handling Files           //
-//                                                           //
-// Jim Fawcett, CSE686 - Internet Programming, Spring 2019   //
-///////////////////////////////////////////////////////////////
-/*
+﻿/*
  * This package implements Controller for Files Web Api.
  * The web api application:
  * - uploads files to wwwroot/FileStore

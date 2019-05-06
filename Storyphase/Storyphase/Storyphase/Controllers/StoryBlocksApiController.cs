@@ -9,8 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Storyphase.Data;
 using Storyphase.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Storyphase.Controllers
 {
     [Route("api/[controller]")]
