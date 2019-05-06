@@ -36,7 +36,7 @@ namespace Storyphase.Controllers
     {
       hostingEnvironment_ = hostingEnvironment;
       webRootPath = hostingEnvironment_.WebRootPath;
-      filePath = Path.Combine(webRootPath, "Stories");
+      filePath = Path.Combine(webRootPath, "images");
     }
     ////----< show files in wwwroot/FileStorage >----------------
     //
