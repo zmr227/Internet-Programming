@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Storyphase.Data;
 
 namespace Storyphase.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190502001206_TestFavorite")]
-    partial class TestFavorite
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,7 +194,11 @@ namespace Storyphase.Migrations
                     b.Property<string>("Content")
                         .IsRequired();
 
+                    b.Property<DateTime>("CreateTime");
+
                     b.Property<int?>("StoriesId");
+
+                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 
@@ -331,8 +333,6 @@ namespace Storyphase.Migrations
             modelBuilder.Entity("Storyphase.Models.ApplicationUsers", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Name");
 
                     b.HasDiscriminator().HasValue("ApplicationUsers");
                 });

@@ -41,8 +41,7 @@ namespace Storyphase.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Discriminator = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -207,7 +206,8 @@ namespace Storyphase.Migrations
                     CreateTimeString = table.Column<string>(nullable: true),
                     StoryTypeId = table.Column<int>(nullable: false),
                     SpecialTagId = table.Column<int>(nullable: false),
-                    PrivacyTagId = table.Column<int>(nullable: false)
+                    PrivacyTagId = table.Column<int>(nullable: false),
+                    BlockNumber = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -239,7 +239,9 @@ namespace Storyphase.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(nullable: false),
-                    StoriesId = table.Column<int>(nullable: true)
+                    StoriesId = table.Column<int>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
+                    CreateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -258,7 +260,8 @@ namespace Storyphase.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    StoryId = table.Column<int>(nullable: false)
+                    StoryId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -269,23 +272,30 @@ namespace Storyphase.Migrations
                         principalTable: "Stories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StoriesAddToFavorites_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "StoryBlocks",
                 columns: table => new
                 {
-                    StoryBlockId = table.Column<long>(nullable: false)
+                    StoryBlocksId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Path = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),
+                    Position = table.Column<int>(nullable: false),
                     StoriesId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StoryBlocks", x => x.StoryBlockId);
+                    table.PrimaryKey("PK_StoryBlocks", x => x.StoryBlocksId);
                     table.ForeignKey(
                         name: "FK_StoryBlocks_Stories_StoriesId",
                         column: x => x.StoriesId,
@@ -357,6 +367,11 @@ namespace Storyphase.Migrations
                 name: "IX_StoriesAddToFavorites_StoryId",
                 table: "StoriesAddToFavorites",
                 column: "StoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StoriesAddToFavorites_UserId",
+                table: "StoriesAddToFavorites",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StoryBlocks_StoriesId",

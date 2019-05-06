@@ -10,9 +10,7 @@ namespace Storyphase.Models
 {
     public class ApplicationUsers : IdentityUser
     {
-        [Display(Name = "User")]
-        public string Name { get; set; }
-
+        
         [NotMapped]
         public bool IsAdmin { get; set; }
 

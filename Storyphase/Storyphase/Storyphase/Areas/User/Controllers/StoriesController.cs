@@ -43,31 +43,7 @@ namespace Storyphase.Areas.User.Controllers
             var storyList = await _db.Stories.Include(m => m.StoryTypes)
                             .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
                             .Include(m => m.StoryBlocks).Include(m => m.Comments).ToListAsync();
-
-            // load current user's favorite stories' ids to session
-            List<int> lstFavorite = HttpContext.Session.Get<List<int>>("ssFavorite");
-            if (lstFavorite == null)
-            {
-                lstFavorite = new List<int>();
-            }
-            var userId = _userManager.GetUserId(HttpContext.User);
-            var favoriteStories = _db.StoriesAddToFavorites.Where(s => s.UserId == userId).ToList();
-
-            if (favoriteStories != null && favoriteStories.Count > 0)
-            {
-                foreach (var item in favoriteStories)
-                {
-                    var id = item.StoryId;
-                    if (!lstFavorite.Contains(id))
-                    {
-                        lstFavorite.Add(id);
-                    }
-                }
-            }
-
-            // set the session
-            HttpContext.Session.Set("ssFavorite", lstFavorite);
-
+            
             return View(storyList);
         }
 
@@ -166,7 +142,7 @@ namespace Storyphase.Areas.User.Controllers
             if (ModelState.IsValid)
             {
                 var userId = _userManager.GetUserId(HttpContext.User);
-                var userName = _db.ApplicationUsers.Where(u => u.Id == userId).FirstOrDefault().Name;
+                var userName = _db.ApplicationUsers.Where(u => u.Id == userId).FirstOrDefault().UserName;
 
                 Comments comments = new Comments
                 {

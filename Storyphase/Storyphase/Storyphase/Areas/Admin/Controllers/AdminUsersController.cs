@@ -59,7 +59,7 @@ namespace Storyphase.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 ApplicationUsers userFromDb = _db.ApplicationUsers.Where(u => u.Id == id).FirstOrDefault();
-                userFromDb.Name = applicationUser.Name;
+                userFromDb.UserName = applicationUser.UserName;
                 userFromDb.PhoneNumber = applicationUser.PhoneNumber;
 
                 _db.SaveChanges();

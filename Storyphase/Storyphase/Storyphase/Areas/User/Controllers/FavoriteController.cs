@@ -45,6 +45,12 @@ namespace Storyphase.Areas.User.Controllers
                 {
                     Stories sty = _db.Stories.Include(p => p.SpecialTags).Include(p => p.StoryTypes).Include(p => p.PrivacyTags).Where(p => p.Id == item.StoryId).FirstOrDefault();
                     FavoriteVM.Stories.Add(sty);
+
+                    var id = item.StoryId;
+                    if (!lstFavorite.Contains(id))
+                    {
+                        lstFavorite.Add(id);
+                    }
                 }
             }
 
@@ -98,7 +104,7 @@ namespace Storyphase.Areas.User.Controllers
             List<int> lstFavorite = HttpContext.Session.Get<List<int>>("ssFavorite");
             var userId = _userManager.GetUserId(HttpContext.User);
             StoriesAddToFavorite record = _db.StoriesAddToFavorites.Where(s => s.StoryId == id && s.UserId == userId).FirstOrDefault();
-
+            try { 
             if (lstFavorite != null && lstFavorite.Count > 0)
             {
                 if (lstFavorite.Contains(id))
@@ -114,6 +120,11 @@ namespace Storyphase.Areas.User.Controllers
             HttpContext.Session.Set("ssFavorite", lstFavorite);
 
             return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
     }
 }

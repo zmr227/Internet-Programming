@@ -10,8 +10,8 @@ using Storyphase.Data;
 namespace Storyphase.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190423004832_WebApi")]
-    partial class WebApi
+    [Migration("20190506191626_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -196,7 +196,11 @@ namespace Storyphase.Migrations
                     b.Property<string>("Content")
                         .IsRequired();
 
+                    b.Property<DateTime>("CreateTime");
+
                     b.Property<int?>("StoriesId");
+
+                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 
@@ -239,6 +243,8 @@ namespace Storyphase.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BlockNumber");
+
                     b.Property<DateTime>("CreateTime");
 
                     b.Property<string>("CreateTimeString");
@@ -276,9 +282,13 @@ namespace Storyphase.Migrations
 
                     b.Property<int>("StoryId");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("StoryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("StoriesAddToFavorites");
                 });
@@ -296,6 +306,8 @@ namespace Storyphase.Migrations
                     b.Property<string>("Name");
 
                     b.Property<string>("Path");
+
+                    b.Property<int>("Position");
 
                     b.Property<int?>("StoriesId");
 
@@ -323,8 +335,6 @@ namespace Storyphase.Migrations
             modelBuilder.Entity("Storyphase.Models.ApplicationUsers", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Name");
 
                     b.HasDiscriminator().HasValue("ApplicationUsers");
                 });
@@ -405,6 +415,10 @@ namespace Storyphase.Migrations
                         .WithMany()
                         .HasForeignKey("StoryId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Storyphase.Models.ApplicationUsers", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Storyphase.Models.StoryBlocks", b =>
