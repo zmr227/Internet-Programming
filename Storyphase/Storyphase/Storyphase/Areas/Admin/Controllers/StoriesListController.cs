@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Storyphase.Data;
@@ -33,7 +31,7 @@ namespace Storyphase.Controllers
         {
             _db = db;
             _hostingEnvironment = hostingEnvironment;
-            
+
             StoriesVM = new StoriesViewModel()
             {
                 StoryTypes = _db.StoryTypes.ToList(),
@@ -67,17 +65,18 @@ namespace Storyphase.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePost()
         {
-            try
+            if(StoriesVM.Stories.Title != null && _db.Stories.Any(x => x.Title.Equals(StoriesVM.Stories.Title)))
             {
-                // TODO: Add insert logic here
-
+                ModelState.AddModelError("Title", "Already Exists");
+            }
+            if (ModelState.IsValid)
+            {
                 _db.Stories.Add(StoriesVM.Stories);
                 await _db.SaveChangesAsync();
 
                 string webRootPath = _hostingEnvironment.WebRootPath;
                 var files = HttpContext.Request.Form.Files;
                 var storyFromDb = _db.Stories.Find(StoriesVM.Stories.Id);
-
 
                 if (files.Count != 0)
                 {
@@ -91,8 +90,8 @@ namespace Storyphase.Controllers
 
                     using (var filestream = new FileStream(Path.Combine(uploads, StoriesVM.Stories.Id + extension), FileMode.Create))
                     {
-                       files[0].CopyTo(filestream);
-                        
+                        files[0].CopyTo(filestream);
+
                     }
                     storyFromDb.Image = @"\" + SD.ImageFolder + @"\" + StoriesVM.Stories.Id + extension;
                 }
@@ -104,11 +103,14 @@ namespace Storyphase.Controllers
                     storyFromDb.Image = @"\" + SD.ImageFolder + @"\" + StoriesVM.Stories.Id + ".png";
                 }
                 await _db.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
+
             }
-            catch
+            else
             {
-                return View(StoriesVM);
+                ViewBag.stories = StoriesVM.Stories;
+                return View("Conflict");
             }
         }
 
@@ -117,7 +119,6 @@ namespace Storyphase.Controllers
         {
             if (id == null)
             {
-
                 return NotFound();
             }
 
@@ -133,11 +134,14 @@ namespace Storyphase.Controllers
         // POST: Stories/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id)
         {
-            try
+            if (StoriesVM.Stories.Title != null && _db.Stories.Any(x => x.Title.Equals(StoriesVM.Stories.Title) && x.Id != id))
             {
-
+                ModelState.AddModelError("Title", "Already Exists");
+            }
+            if (ModelState.IsValid)
+            {
                 string webRootPath = _hostingEnvironment.WebRootPath;
                 var files = HttpContext.Request.Form.Files;
 
@@ -177,12 +181,12 @@ namespace Storyphase.Controllers
 
                 await _db.SaveChangesAsync();
 
-
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            else
             {
-                return View(StoriesVM);
+                ViewBag.stories = StoriesVM.Stories;
+                return View("Conflict");
             }
         }
 
@@ -245,22 +249,22 @@ namespace Storyphase.Controllers
                 Stories stories = await _db.Stories.FindAsync(id);
 
                 // delete blocks
-                var block_imgs = Path.Combine(webRootPath, SD.StoryFolder + @"\" + stories.Id);
-                Directory.Delete(block_imgs, true);
-
                 var blocks = _db.StoryBlocks.Where(b => b.StoriesId == id).ToList();
-                if (blocks != null)
+                if (blocks.Count > 0)
                 {
                     foreach (var item in blocks)
                     {
                         _db.StoryBlocks.Remove(item);
                     }
+                    var block_imgs = Path.Combine(webRootPath, SD.StoryFolder + @"\" + stories.Id);
+                    Directory.Delete(block_imgs, true);
+
                 }
                 // delete comments
                 var comments = _db.Comments.Where(c => c.StoriesId == id);
                 if (comments != null)
                 {
-                    foreach(var item in comments)
+                    foreach (var item in comments)
                     {
                         _db.Comments.Remove(item);
                     }
@@ -293,7 +297,7 @@ namespace Storyphase.Controllers
 
             return View(blocklist);
         }
-
         
+
     }
 }
