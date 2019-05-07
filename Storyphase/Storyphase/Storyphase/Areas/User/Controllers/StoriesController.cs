@@ -43,7 +43,7 @@ namespace Storyphase.Areas.User.Controllers
             var storyList = await _db.Stories.Include(m => m.StoryTypes)
                             .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
                             .Include(m => m.StoryBlocks).Include(m => m.Comments).ToListAsync();
-            
+
             return View(storyList);
         }
 
@@ -112,20 +112,27 @@ namespace Storyphase.Areas.User.Controllers
         {
             int count = 1;
             List<int> itemIdList = new List<int>();
-            itemIdList = itemIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
-            foreach (var itemId in itemIdList)
+            try
             {
-
-                StoryBlocks block = _db.StoryBlocks.Where(x => x.StoryBlocksId == itemId).FirstOrDefault();
-                block.Position = count;
-                if (ModelState.IsValid)
+                itemIdList = itemIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+                foreach (var itemId in itemIdList)
                 {
-                    _db.Update(block);
-                    _db.SaveChanges();
-                    count++;
+
+                    StoryBlocks block = _db.StoryBlocks.Where(x => x.StoryBlocksId == itemId).FirstOrDefault();
+                    block.Position = count;
+                    if (ModelState.IsValid)
+                    {
+                        _db.Update(block);
+                        _db.SaveChanges();
+                        count++;
+                    }
                 }
+                return Json(true);
             }
-            return Json(true);
+            catch
+            {
+                return Json(false);
+            }
         }
 
         // Comments Operation
@@ -181,15 +188,23 @@ namespace Storyphase.Areas.User.Controllers
 
         //POST Delete action Method
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteComment(long id)
+        public IActionResult DeleteComment(long id)
         {
-            var comment = await _db.Comments.FindAsync(id);
-            var storyId = comment.StoriesId;
-            _db.Comments.Remove(comment);
+            try
+            {
+                var comment = _db.Comments.Where(x => x.Id == id).FirstOrDefault();
 
-            await _db.SaveChangesAsync();
-            return RedirectToAction("Details", "Stories", new { id = storyId });
+                var storyId = comment.StoriesId;
+                _db.Comments.Remove(comment);
+
+                _db.SaveChanges();
+
+                return Json(new { success = true, message = "Delete Successfully." });
+            }
+            catch(Exception ex)
+            {
+                return Json(new { success = false , message = ex.Message});
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

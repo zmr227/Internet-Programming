@@ -23,6 +23,8 @@ namespace Storyphase.Controllers
 
         private readonly HostingEnvironment _hostingEnvironment;
 
+        public List<String> ImageFormat;
+          
         [BindProperty]
         public StoriesViewModel StoriesVM { get; set; }
 
@@ -31,6 +33,7 @@ namespace Storyphase.Controllers
         {
             _db = db;
             _hostingEnvironment = hostingEnvironment;
+            ImageFormat = new List<string>(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".tif"});
 
             StoriesVM = new StoriesViewModel()
             {
@@ -65,7 +68,7 @@ namespace Storyphase.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePost()
         {
-            if(StoriesVM.Stories.Title != null && _db.Stories.Any(x => x.Title.Equals(StoriesVM.Stories.Title)))
+            if (StoriesVM.Stories.Title != null && _db.Stories.Any(x => x.Title.Equals(StoriesVM.Stories.Title)))
             {
                 ModelState.AddModelError("Title", "Already Exists");
             }
@@ -83,17 +86,25 @@ namespace Storyphase.Controllers
                     // if image has been uploaded
                     var uploads = Path.Combine(webRootPath, SD.ImageFolder);
                     var extension = Path.GetExtension(files[0].FileName);
-
-                    // create a folder for current story
-                    string pathString = Path.Combine(webRootPath, SD.StoryFolder) + @"\" + StoriesVM.Stories.Id.ToString();
-                    Directory.CreateDirectory(pathString);
-
-                    using (var filestream = new FileStream(Path.Combine(uploads, StoriesVM.Stories.Id + extension), FileMode.Create))
+                    if (ImageFormat.Contains(extension))
                     {
-                        files[0].CopyTo(filestream);
+                        // create a folder for current story
+                        string pathString = Path.Combine(webRootPath, SD.StoryFolder) + @"\" + StoriesVM.Stories.Id.ToString();
+                        Directory.CreateDirectory(pathString);
 
+                        using (var filestream = new FileStream(Path.Combine(uploads, StoriesVM.Stories.Id + extension), FileMode.Create))
+                        {
+                            files[0].CopyTo(filestream);
+                        }
+                        storyFromDb.Image = @"\" + SD.ImageFolder + @"\" + StoriesVM.Stories.Id + extension;
                     }
-                    storyFromDb.Image = @"\" + SD.ImageFolder + @"\" + StoriesVM.Stories.Id + extension;
+                    else
+                    {
+                        // if the uploaded file is not of supported format
+                        uploads = Path.Combine(webRootPath, SD.ImageFolder + @"\" + SD.DefaultStoryImage);
+                        System.IO.File.Copy(uploads, webRootPath + @"\" + SD.ImageFolder + @"\" + StoriesVM.Stories.Id + ".png");
+                        storyFromDb.Image = @"\" + SD.ImageFolder + @"\" + StoriesVM.Stories.Id + ".png";
+                    }
                 }
                 else
                 {
@@ -297,7 +308,7 @@ namespace Storyphase.Controllers
 
             return View(blocklist);
         }
-        
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@{
     ViewData["Title"] = "Index";
 }
 <link rel="stylesheet" href="~/css/home.css" />
@@ -15,13 +16,13 @@
             <div class="col-md-4">
                 <h3>Read & Comment</h3>
                 <p> With users from all over the world.</p>
-                <p><a asp-action="Index" asp-controller="Stories">Start Your Journey</a></p>
+                <p><a asp-area="Identity" asp-page="/Account/Login">Start Your Journey</a></p>
             </div>
 
             <div class="col-md-4">
                 <h3>Write & Share </h3>
                 <p>Your own amazing stories and share them with users from all over the world.</p>
-                <p><a href="#">Register Now</a></p>
+                <p><a asp-area="Identity" asp-page="/Account/Register">Register Now</a></p>
             </div>
 
             <div class="col-md-4">
@@ -31,4 +32,4 @@
             </div>
         </div>
     </div>
-    </div>
+</div>

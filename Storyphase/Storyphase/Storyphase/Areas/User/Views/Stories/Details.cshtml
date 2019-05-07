@@ -125,9 +125,12 @@
                         <a class="comment-img" href="#non">
                             <img class="avatar" src="~/images/default-avatar.jpg" alt="" />
                         </a>
-                        @if (User.IsInRole(SD.AdminUser))
+                        @if (User.IsInRole(SD.AdminUser) || (User.IsInRole(SD.User) && User.Identity.Name == Model.Comments[i].UserName))
                         {
                             <a asp-action="DeleteComment" asp-route-id="@Model.Comments[i].Id" class="btn btn-outline-danger float-right">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <a class="btn float-right" onclick="deleteAlert('@Url.Action("DeleteComment", "Stories", new { id = Model.Comments[i].Id})')">
                                 <i class="fas fa-trash"></i>
                             </a>
                         }
@@ -148,3 +151,29 @@
     </div>
 </form>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/jquery-ui.js"></script>
+<link href="~/css/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript">
+    function deleteAlert(url) {
+        var x = confirm("Do you really want to delete this?");
+        if (x == true) {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                success(response) {
+                    if (response.success) {
+                        alert("Success!")
+                        location.reload();
+                    }
+                    else {
+                        alert("Error");
+                    }
+                }
+            });
+        }
+        else {
+        }
+
+    }
+</script>

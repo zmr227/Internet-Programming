@@ -1,8 +1,4 @@
-﻿///////////////////////////////////////////////////////////////
-// ConsoleClient.cs - Client for WebApi FilesController      //
-//                                                           //
-// Jim Fawcett, CSE686 - Internet Programming, Spring 2019   //
-///////////////////////////////////////////////////////////////
+﻿
 /*
  * - Based on Asp.Net Core Framework, this client project generates
  *   dynamic link library that can be hosted by Visual Studio or
