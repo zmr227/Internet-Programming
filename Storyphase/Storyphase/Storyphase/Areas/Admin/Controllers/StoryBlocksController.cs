@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -18,13 +19,15 @@ namespace Storyphase.Areas.Admin.Controllers
     public class StoryBlocksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly HostingEnvironment _hostingEnvironment;
         // define all available image format
         public List<string> ImageFormat;
 
-        public StoryBlocksController(ApplicationDbContext context, HostingEnvironment hostingEnvironment)
+        public StoryBlocksController(ApplicationDbContext context, UserManager<IdentityUser> userManager, HostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _userManager = userManager;
             _hostingEnvironment = hostingEnvironment;
             ImageFormat = new List<string>(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
         }
@@ -32,7 +35,12 @@ namespace Storyphase.Areas.Admin.Controllers
         // GET: Admin/StoryBlocks
         public async Task<IActionResult> Index()
         {
-            var blocks = _context.StoryBlocks.Include(s => s.Stories);
+            var userName = _userManager.GetUserName(HttpContext.User);
+            var blocks = _context.StoryBlocks
+                          .Include(s => s.Stories)
+                          .Where(s=>s.Stories.PrivacyTags.Equals("public") || s.Stories.Author.Equals(userName))
+                          .OrderBy(s=>s.Stories.Title);
+
             return View(await blocks.ToListAsync());
         }
 
@@ -59,7 +67,10 @@ namespace Storyphase.Areas.Admin.Controllers
         // GET: Admin/StoryBlocks/Create
         public IActionResult Create()
         {
-            ViewData["StoriesId"] = new SelectList(_context.Stories, "Id", "Title");
+            var userName = _userManager.GetUserName(HttpContext.User);
+            var availableStories = _context.Stories
+                                        .Where(s=>s.PrivacyTags.Name.Equals("public") || s.Author.Equals(userName));
+            ViewData["StoriesId"] = new SelectList(availableStories, "Id", "Title");
             return View();
         }
 
