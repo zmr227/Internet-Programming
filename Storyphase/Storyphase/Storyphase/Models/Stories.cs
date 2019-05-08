@@ -18,6 +18,8 @@ namespace Storyphase.Models
         public string Title { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
+        
+        public string Author { get; set; }
 
         public DateTime CreateTime { get; set; } = DateTime.Now;
 
@@ -54,13 +56,14 @@ namespace Storyphase.Models
     public class StoryBlocks
     {
         public long StoryBlocksId { get; set; }
+        [Required]
         public string Name { get; set; }
-        public string Path { get; set; }
         public string Content { get; set; }
         public string Image { get; set; }
 
         public int Position { get; set; }
 
+        [Display(Name = "Story")]
         public int? StoriesId { get; set; }
         [ForeignKey("StoriesId")]
         public Stories Stories { get; set; }

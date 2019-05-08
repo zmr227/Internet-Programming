@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Storyphase.Data;
@@ -20,20 +21,21 @@ namespace Storyphase.Controllers
     public class StoriesListController : Controller
     {
         private readonly ApplicationDbContext _db;
-
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly HostingEnvironment _hostingEnvironment;
 
-        public List<String> ImageFormat;
-          
+        public List<string> ImageFormat;
+
         [BindProperty]
         public StoriesViewModel StoriesVM { get; set; }
 
         // initialize the constructor
-        public StoriesListController(ApplicationDbContext db, HostingEnvironment hostingEnvironment)
+        public StoriesListController(ApplicationDbContext db, UserManager<IdentityUser> userManager, HostingEnvironment hostingEnvironment)
         {
             _db = db;
+            _userManager = userManager;
             _hostingEnvironment = hostingEnvironment;
-            ImageFormat = new List<string>(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".tif"});
+            ImageFormat = new List<string>(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
 
             StoriesVM = new StoriesViewModel()
             {
@@ -49,9 +51,11 @@ namespace Storyphase.Controllers
         // GET: Stories
         public async Task<IActionResult> Index()
         {
+            var userName = _userManager.GetUserName(HttpContext.User);
             var storiesVM = await _db.Stories.Include(m => m.StoryTypes)
                             .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
-                            .Include(m => m.StoryBlocks).Include(m => m.Comments).ToListAsync();
+                            .Include(m => m.StoryBlocks).Include(m => m.Comments)
+                            .Where(m => m.PrivacyTags.Name == "public" || m.Author == userName).ToListAsync();
 
             return View(storiesVM);
         }
@@ -68,12 +72,17 @@ namespace Storyphase.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePost()
         {
-            if (StoriesVM.Stories.Title != null && _db.Stories.Any(x => x.Title.Equals(StoriesVM.Stories.Title)))
+            var title = StoriesVM.Stories.Title;
+            var exist = await _db.Stories.Where(x => x.Title == title).FirstOrDefaultAsync();
+            StoriesVM.Stories.Author = _userManager.GetUserName(HttpContext.User);
+
+            if (title != null && exist != null)
             {
                 ModelState.AddModelError("Title", "Already Exists");
             }
             if (ModelState.IsValid)
             {
+
                 _db.Stories.Add(StoriesVM.Stories);
                 await _db.SaveChangesAsync();
 
@@ -113,6 +122,7 @@ namespace Storyphase.Controllers
                     System.IO.File.Copy(uploads, webRootPath + @"\" + SD.ImageFolder + @"\" + StoriesVM.Stories.Id + ".png");
                     storyFromDb.Image = @"\" + SD.ImageFolder + @"\" + StoriesVM.Stories.Id + ".png";
                 }
+
                 await _db.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
@@ -165,16 +175,24 @@ namespace Storyphase.Controllers
                     var extension_new = Path.GetExtension(files[0].FileName);
                     var extension_old = Path.GetExtension(storyFromDb.Image);
 
-                    if (System.IO.File.Exists(Path.Combine(uploads, StoriesVM.Stories.Id + extension_old)))
+                    // if the extension of the upload file is valid
+                    if (ImageFormat.Contains(extension_new))
                     {
-                        System.IO.File.Delete(Path.Combine(uploads, StoriesVM.Stories.Id + extension_old));
-                    }
+                        if (System.IO.File.Exists(Path.Combine(uploads, StoriesVM.Stories.Id + extension_old)))
+                        {
+                            System.IO.File.Delete(Path.Combine(uploads, StoriesVM.Stories.Id + extension_old));
+                        }
 
-                    using (var filestream = new FileStream(Path.Combine(uploads, StoriesVM.Stories.Id + extension_new), FileMode.Create))
-                    {
-                        files[0].CopyTo(filestream);
+                        using (var filestream = new FileStream(Path.Combine(uploads, StoriesVM.Stories.Id + extension_new), FileMode.Create))
+                        {
+                            files[0].CopyTo(filestream);
+                        }
+                        StoriesVM.Stories.Image = @"\" + SD.ImageFolder + @"\" + StoriesVM.Stories.Id + extension_new;
                     }
-                    StoriesVM.Stories.Image = @"\" + SD.ImageFolder + @"\" + StoriesVM.Stories.Id + extension_new;
+                    else
+                    {
+                        ModelState.AddModelError("Format", "Invalid");
+                    }
                 }
 
                 // image uploaded by user
@@ -185,7 +203,6 @@ namespace Storyphase.Controllers
 
                 storyFromDb.Title = StoriesVM.Stories.Title;
                 storyFromDb.Description = StoriesVM.Stories.Description;
-                storyFromDb.CreateTime = DateTime.Now.ToLocalTime();
                 storyFromDb.StoryTypeId = StoriesVM.Stories.StoryTypeId;
                 storyFromDb.SpecialTagId = StoriesVM.Stories.SpecialTagId;
                 storyFromDb.PrivacyTagId = StoriesVM.Stories.PrivacyTagId;

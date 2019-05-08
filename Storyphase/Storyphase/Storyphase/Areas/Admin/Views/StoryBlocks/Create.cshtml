@@ -5,7 +5,7 @@
 }
 
 <br />
-<h2 class="text-info">Create Story</h2>
+<h2 class="text-info">Create Story Block</h2>
 <form method="post" enctype="multipart/form-data">
     <div class="p-4 border rounded">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -23,7 +23,8 @@
                 <label asp-for="Content"></label>
             </div>
             <div class="col-5">
-                <input asp-for="Content" class="form-control" />
+                <textarea asp-for="Content" class="form-control" text-wrap="normal" type="text" placeholder="Please add your experience here"></textarea>
+                
             </div>
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>

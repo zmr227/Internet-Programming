@@ -1,55 +1,59 @@
 ﻿@model IEnumerable<Storyphase.Models.StoryBlocks>
 
-<h1>Index</h1>
+<br /><br />
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Story Blocks List</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp; New Story Block</a>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
+<br />
+
+<div>
+    <table class="table table-striped border">
+        <tr class="table-info">
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(m => m.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Path)
+                @Html.DisplayNameFor(m => m.Image)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Content)
+                @Html.DisplayNameFor(m => m.Stories)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Stories)
-            </th>
+         
+            <th></th>
             <th></th>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Path)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stories.Title)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.StoryBlocksId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.StoryBlocksId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.StoryBlocksId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Image)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(m => item.Stories.Title)
+                </td>
+                <td></td>
+                <td style="width: 150px;">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary text-white" asp-action="Edit" asp-route-id="@item.StoryBlocksId"><i class="fas fa-edit"></i></a>
+
+                        <a class="btn btn-success text-white" asp-action="Details" asp-route-id="@item.StoryBlocksId"><i class="far fa-list-alt"></i></a>
+
+                        <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.StoryBlocksId"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                </td>
+                
+            </tr>
+        }
+    </table>
+</div>

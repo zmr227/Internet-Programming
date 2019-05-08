@@ -40,10 +40,34 @@ namespace Storyphase.Areas.User.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var userName = _userManager.GetUserName(HttpContext.User);
             var storyList = await _db.Stories.Include(m => m.StoryTypes)
                             .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
-                            .Include(m => m.StoryBlocks).Include(m => m.Comments).ToListAsync();
+                            .Include(m => m.StoryBlocks).Include(m => m.Comments)
+                            .Where(m => m.PrivacyTags.Name == "public" || m.Author == userName).ToListAsync();
 
+            return View(storyList);
+        }
+
+        public async Task<IActionResult> List(int id)
+        {
+            var storyList = new List<Stories>();
+            if (id == 2)
+            {
+                 var userName = _userManager.GetUserName(HttpContext.User);
+                 storyList = await _db.Stories.Include(m => m.StoryTypes)
+                            .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
+                            .Include(m => m.StoryBlocks).Include(m => m.Comments)
+                            .Where(m => m.PrivacyTagId == id && m.Author == userName).ToListAsync();
+            }
+            else
+            {
+                 storyList = await _db.Stories.Include(m => m.StoryTypes)
+                            .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
+                            .Include(m => m.StoryBlocks).Include(m => m.Comments)
+                            .Where(m => m.PrivacyTagId == id).ToListAsync();
+            }
+            
             return View(storyList);
         }
 
@@ -79,7 +103,7 @@ namespace Storyphase.Areas.User.Controllers
             // set the session
             HttpContext.Session.Set("ssFavorite", lstFavorite);
 
-            return RedirectToAction("Index", "Home", new { area = "User" });
+            return RedirectToAction(nameof(Details), new { id = id });
         }
 
         // remove from favorite list
@@ -95,7 +119,7 @@ namespace Storyphase.Areas.User.Controllers
             }
             // set the session
             HttpContext.Session.Set("ssFavorite", lstFavorite);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), new { id = id });
         }
 
         // Get StoryBlocks

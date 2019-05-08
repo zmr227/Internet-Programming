@@ -104,9 +104,9 @@
 
 @if (User.IsInRole(SD.AdminUser))
 {
-    <div class="">
+    <div class="" >
         <ul class="list-group">
-            <li class="list-group-item" style="border:hidden">
+            <li class="list-group-item" style="border:hidden; background: none">
                 <h4>Blocks of Current Story</h4>
                 <div class="text-right">
                     <a class="btn btn-info" href="@Url.Action("Index", "Stories")"><i class="fas fa-check-circle"></i>&nbsp; Back to List</a>
@@ -117,7 +117,7 @@
         <ul id="SortableGallery" class="list-group-horizontal" style="padding-inline-start: 5px;">
             @foreach (var item in @Model)
             {
-                <li id="Blocks"class="list-group-item col-md-3">
+                <li id="Blocks"class="list-group-item col-md-3" style="background: none">
                     <div style="float: left;">
                         <p class="taskInline" id="task@(item.StoryBlocksId)" data-taskid="@item.StoryBlocksId">@item.Name</p>
                         <img class="img-fluid" src="@item.Image"/>

@@ -71,24 +71,7 @@
 
                 </div>
                 <div class="col-8">
-                    @{
-                        bool isInFavorite = false;
-                        List<int> lstFavorite = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite");
-                        if (lstFavorite != null && lstFavorite.Contains(Model.Stories.Id))
-                        {
-                            isInFavorite = true;
-
-                        }
-                    }
-                    @if (isInFavorite)
-                    {
-                        <button type="submit" value="Remove From Favorite" asp-action="Remove" asp-route-id="@Model.Stories.Id" class="btn btn-danger form-control">Remove From Favorite</button>
-
-                    }
-                    else
-                    {
-                        <button type="submit" value="Add to Favorite" asp-route-id="@Model.Stories.Id" class="btn btn-primary form-control">Add to Favorite</button>
-                    }
+                    <a asp-action="BlockShow" class="btn" style="width: 100%; background-color: hotpink; color: white;" asp-route-id="@Model.Stories.Id">Show Story</a>
                 </div>
             </div>
 
@@ -98,13 +81,31 @@
         </div>
         <div class="col-3">
             <img src="@Model.Stories.Image" style="width:100%; border-radius:5px; border:1px solid #bbb9b9" class="align-items-center" />
+            <br /><br />
+            @{
+                bool isInFavorite = false;
+                List<int> lstFavorite = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite");
+                if (lstFavorite != null && lstFavorite.Contains(Model.Stories.Id))
+                {
+                    isInFavorite = true;
+
+                }
+            }
+            @if (isInFavorite)
+            {
+                <button type="submit" value="Remove From Favorite" asp-action="Remove" asp-route-id="@Model.Stories.Id" class="btn btn-danger form-control">Remove From Favorite</button>
+
+            }
+            else
+            {
+                <button type="submit" value="Add to Favorite" asp-route-id="@Model.Stories.Id" class="btn btn-outline-primary form-control" >Add to Favorite</button>
+            }
         </div>
 
         <br />
         <div class="form-group">
             <input hidden asp-for="@Model.Stories.Id" />
-            <a asp-action="Index" class="btn btn-success">Back to List</a>
-            <a asp-action="BlockShow" class="btn btn-primary" asp-route-id="@Model.Stories.Id">Show Story</a>
+            <a asp-action="Index" class="btn btn-success"><i class="fas fa-check-circle"></i>&nbsp;Back to List</a>
         </div>
     </div>
     <br />

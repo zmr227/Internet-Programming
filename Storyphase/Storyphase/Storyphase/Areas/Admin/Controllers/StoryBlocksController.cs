@@ -19,11 +19,14 @@ namespace Storyphase.Areas.Admin.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly HostingEnvironment _hostingEnvironment;
+        // define all available image format
+        public List<string> ImageFormat;
 
         public StoryBlocksController(ApplicationDbContext context, HostingEnvironment hostingEnvironment)
         {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
+            ImageFormat = new List<string>(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
         }
 
         // GET: Admin/StoryBlocks
@@ -44,7 +47,7 @@ namespace Storyphase.Areas.Admin.Controllers
             var storyBlocks = await _context.StoryBlocks
                 .Include(s => s.Stories)
                 .FirstOrDefaultAsync(m => m.StoryBlocksId == id);
-            
+
             if (storyBlocks == null)
             {
                 return NotFound();
@@ -59,57 +62,65 @@ namespace Storyphase.Areas.Admin.Controllers
             ViewData["StoriesId"] = new SelectList(_context.Stories, "Id", "Title");
             return View();
         }
-       
+
         // POST: StoryBlocks/Create
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePost(StoryBlocks storyBlock)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // set its position as the last block
-                var story = _context.Stories.Where(x=>x.Id == storyBlock.StoriesId).FirstOrDefault();
-                story.BlockNumber++;
-                storyBlock.Position = story.BlockNumber;
-
-                _context.StoryBlocks.Add(storyBlock);
-                await _context.SaveChangesAsync();
-
-                string webRootPath = _hostingEnvironment.WebRootPath;
-                var files = HttpContext.Request.Form.Files;
-                var blockFromDb = _context.StoryBlocks.Find(storyBlock.StoryBlocksId);
-
-
-                if (files.Count != 0)
                 {
-                    // if image has been uploaded
-                    var curPath = SD.StoryFolder + @"\" + storyBlock.StoriesId;
-                    var uploads = Path.Combine(webRootPath, curPath);
-                    //var uploads = Path.Combine(webRootPath, SD.ImageFolder);
-                    var extension = Path.GetExtension(files[0].FileName);
+                    // set its position as the last block
+                    var story = _context.Stories.Where(x => x.Id == storyBlock.StoriesId).FirstOrDefault();
+                    story.BlockNumber++;
+                    storyBlock.Position = story.BlockNumber;
 
-                    using (var filestream = new FileStream(Path.Combine(uploads, storyBlock.StoryBlocksId + extension), FileMode.Create))
+                    _context.StoryBlocks.Add(storyBlock);
+                    await _context.SaveChangesAsync();
+
+                    string webRootPath = _hostingEnvironment.WebRootPath;
+                    var files = HttpContext.Request.Form.Files;
+                    var blockFromDb = _context.StoryBlocks.Find(storyBlock.StoryBlocksId);
+
+
+                    if (files.Count != 0)
                     {
-                        files[0].CopyTo(filestream);
+                        // if image has been uploaded
+                        var curPath = SD.StoryFolder + @"\" + storyBlock.StoriesId;
+                        var uploads = Path.Combine(webRootPath, curPath);
+                        var extension = Path.GetExtension(files[0].FileName);
+                        if (ImageFormat.Contains(extension))
+                        {
+                            using (var filestream = new FileStream(Path.Combine(uploads, storyBlock.StoryBlocksId + extension), FileMode.Create))
+                            {
+                                files[0].CopyTo(filestream);
+                            }
+                            blockFromDb.Image = @"\" + SD.StoryFolder + @"\" + storyBlock.StoriesId + @"\" + storyBlock.StoryBlocksId + extension;
+                        }
+                        else
+                        {
+                            uploads = Path.Combine(webRootPath, SD.StoryFolder + @"\" + SD.DefaultStoryImage);
+                            System.IO.File.Copy(uploads, webRootPath + @"\" + SD.StoryFolder + @"\" + storyBlock.StoriesId + @"\" + storyBlock.StoryBlocksId + ".png");
+                            blockFromDb.Image = @"\" + SD.StoryFolder + @"\" + storyBlock.StoriesId + @"\" + storyBlock.StoryBlocksId + ".png";
+
+                        }
                     }
-                    blockFromDb.Image = @"\" + SD.StoryFolder + @"\" + storyBlock.StoriesId + @"\" + storyBlock.StoryBlocksId + extension;
+                    else
+                    {
+                        // when no image uploaded by user, use default image
+                        var uploads = Path.Combine(webRootPath, SD.StoryFolder + @"\" + SD.DefaultStoryImage);
+                        System.IO.File.Copy(uploads, webRootPath + @"\" + SD.StoryFolder + @"\" + storyBlock.StoriesId + @"\" + storyBlock.StoryBlocksId + ".png");
+                        blockFromDb.Image = @"\" + SD.StoryFolder + @"\" + storyBlock.StoriesId + @"\" + storyBlock.StoryBlocksId + ".png";
+                    }
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                else
-                {
-                    // when no image uploaded by user, use default image
-                    var uploads = Path.Combine(webRootPath, SD.StoryFolder + @"\" + SD.DefaultStoryImage);
-                    System.IO.File.Copy(uploads, webRootPath + @"\" + SD.StoryFolder + @"\" + storyBlock.StoriesId + @"\" + storyBlock.StoryBlocksId + ".png");
-                    blockFromDb.Image = @"\" + SD.StoryFolder + @"\" + storyBlock.StoriesId + @"\" + storyBlock.StoryBlocksId + ".png";
-                }
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View(storyBlock);
-            }
+
+            return View(storyBlock);
         }
-        
+
         // GET: Admin/StoryBlocks/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -147,18 +158,21 @@ namespace Storyphase.Areas.Admin.Controllers
                     var extension_new = Path.GetExtension(files[0].FileName);
                     var extension_old = Path.GetExtension(storyFromDb.Image);
 
-                    if (System.IO.File.Exists(Path.Combine(uploads, storyBlock.StoryBlocksId + extension_old)))
+                    // if the extension of the upload file is valid
+                    if (ImageFormat.Contains(extension_new))
                     {
-                        System.IO.File.Delete(Path.Combine(uploads, storyBlock.StoryBlocksId + extension_old));
-                    }
+                        if (System.IO.File.Exists(Path.Combine(uploads, storyBlock.StoryBlocksId + extension_old)))
+                        {
+                            System.IO.File.Delete(Path.Combine(uploads, storyBlock.StoryBlocksId + extension_old));
+                        }
 
-                    using (var filestream = new FileStream(Path.Combine(uploads, storyBlock.StoryBlocksId + extension_new), FileMode.Create))
-                    {
-                        files[0].CopyTo(filestream);
+                        using (var filestream = new FileStream(Path.Combine(uploads, storyBlock.StoryBlocksId + extension_new), FileMode.Create))
+                        {
+                            files[0].CopyTo(filestream);
+                        }
+                        storyBlock.Image = @"\" + SD.StoryFolder + @"\" + storyBlock.StoriesId + @"\" + storyBlock.StoryBlocksId + extension_new;
                     }
-                    storyBlock.Image = @"\" + SD.StoryFolder + @"\" + storyBlock.StoriesId + @"\" + storyBlock.StoryBlocksId + extension_new;
                 }
-
                 // image uploaded by user
                 if (storyBlock.Image != null)
                 {
@@ -167,7 +181,6 @@ namespace Storyphase.Areas.Admin.Controllers
 
                 storyFromDb.Name = storyBlock.Name;
                 storyFromDb.Content = storyBlock.Content;
-                storyFromDb.Path = storyBlock.Path;
                 storyFromDb.StoriesId = storyBlock.StoriesId;
 
                 await _context.SaveChangesAsync();
@@ -180,7 +193,7 @@ namespace Storyphase.Areas.Admin.Controllers
                 return View(storyBlock);
             }
         }
-       
+
         // GET: Admin/StoryBlocks/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -205,11 +218,31 @@ namespace Storyphase.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var storyBlocks = await _context.StoryBlocks.FindAsync(id);
-            _context.StoryBlocks.Remove(storyBlocks);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var storyBlocks = await _context.StoryBlocks.FindAsync(id);
+                // remove image
+                string webRootPath = _hostingEnvironment.WebRootPath;
+                var curPath = SD.StoryFolder + @"\" + storyBlocks.StoriesId;
+                var uploads = Path.Combine(webRootPath, curPath);
+                var extension = Path.GetExtension(storyBlocks.Image);
+
+                if (System.IO.File.Exists(Path.Combine(uploads, storyBlocks.StoryBlocksId + extension)))
+                {
+                    System.IO.File.Delete(Path.Combine(uploads, storyBlocks.StoryBlocksId + extension));
+                }
+
+                _context.StoryBlocks.Remove(storyBlocks);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
+
+
 
         private bool StoryBlocksExists(long id)
         {
@@ -221,13 +254,13 @@ namespace Storyphase.Areas.Admin.Controllers
             int count = 1;
             List<int> itemIdList = new List<int>();
             itemIdList = itemIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
-            foreach(var itemId in itemIdList)
+            foreach (var itemId in itemIdList)
             {
                 try
                 {
                     StoryBlocks block = _context.StoryBlocks.Where(x => x.StoryBlocksId == itemId).FirstOrDefault();
                     block.Position = count;
-                    if(block == null)
+                    if (block == null)
                     {
                         _context.StoryBlocks.Add(block);
                     }
@@ -238,7 +271,7 @@ namespace Storyphase.Areas.Admin.Controllers
                     _context.SaveChangesAsync();
 
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     continue;
                 }

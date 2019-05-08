@@ -25,8 +25,8 @@ namespace Storyphase.Controllers
            
             if (context_.StoryBlocks.Count() == 0)
             {
-                context_.StoryBlocks.Add(new StoryBlocks { Name = "SeedBlock1", Path = "~/Stories", Content = "Hello World" });
-                context_.StoryBlocks.Add(new StoryBlocks { Name = "SeedBlock2", Path = "~/Stories", Content = "Hello Again" });
+                context_.StoryBlocks.Add(new StoryBlocks { Name = "SeedBlock1", Content = "Hello World" });
+                context_.StoryBlocks.Add(new StoryBlocks { Name = "SeedBlock2", Content = "Hello Again" });
                 context_.SaveChanges();
             }
         }
@@ -81,8 +81,7 @@ namespace Storyphase.Controllers
                     Name = storyBlock.Name,
                     Image = storyBlock.Image,
                     Content = storyBlock.Content,
-                    StoryBlocksId = storyBlock.StoryBlocksId,
-                    Path = storyBlock.Path
+                    StoryBlocksId = storyBlock.StoryBlocksId
                 };
                 context_.StoryBlocks.Add(block);
                 context_.SaveChanges();

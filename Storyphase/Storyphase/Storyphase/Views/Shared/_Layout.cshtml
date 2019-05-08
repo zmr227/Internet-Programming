@@ -28,8 +28,18 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3 ">
             <div class="container">
                 <a class="navbar-brand" asp-area="User" asp-controller="Home" asp-action="Index">Storyphase</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -42,9 +52,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-white-50" asp-area="User" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white-50" asp-area="User" asp-controller="Stories" asp-action="Index">Stories</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white-50 dropbtn" asp-area="User" asp-controller="Stories" asp-action="Index">Stories</a>
+                            <div class="dropdown-content">
+                                <a asp-controller="Stories" asp-action="List" asp-route-id="1">Public</a>
+                                <a asp-controller="Stories" asp-action="List" asp-route-id="2">Private</a>
+                                <a asp-controller="Stories" asp-action="Index" asp-route-id="">See All Stories</a>
+                            </div>
+
                         </li>
+                       
                         @if (User.IsInRole(SD.AdminUser))
                         {
                             <li class="nav-item">
@@ -132,5 +149,6 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
