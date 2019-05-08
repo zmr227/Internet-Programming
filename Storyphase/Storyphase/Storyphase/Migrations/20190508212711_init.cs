@@ -202,6 +202,7 @@ namespace Storyphase.Migrations
                     Title = table.Column<string>(maxLength: 255, nullable: false),
                     Image = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    Author = table.Column<string>(nullable: true),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     CreateTimeString = table.Column<string>(nullable: true),
                     StoryTypeId = table.Column<int>(nullable: false),
@@ -286,8 +287,7 @@ namespace Storyphase.Migrations
                 {
                     StoryBlocksId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Path = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     Content = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),
                     Position = table.Column<int>(nullable: false),

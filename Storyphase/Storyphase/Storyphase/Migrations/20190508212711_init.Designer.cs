@@ -10,8 +10,8 @@ using Storyphase.Data;
 namespace Storyphase.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190507201639_AddAuthorToStories")]
-    partial class AddAuthorToStories
+    [Migration("20190508212711_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -243,8 +243,7 @@ namespace Storyphase.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Author")
-                        .IsRequired();
+                    b.Property<string>("Author");
 
                     b.Property<int>("BlockNumber");
 
@@ -306,9 +305,8 @@ namespace Storyphase.Migrations
 
                     b.Property<string>("Image");
 
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Path");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<int>("Position");
 
