@@ -8,6 +8,9 @@
 @inject IHttpContextAccessor HttpContextAccessor
 
 <link rel="stylesheet" href="~/css/comment.css">
+<style>
+   
+</style>
 <br />
 
 <h2 class="text-info">Story Details</h2>
@@ -128,10 +131,8 @@
                         </a>
                         @if (User.IsInRole(SD.AdminUser) || (User.IsInRole(SD.User) && User.Identity.Name == Model.Comments[i].UserName))
                         {
-                            <a asp-action="DeleteComment" asp-route-id="@Model.Comments[i].Id" class="btn btn-outline-danger float-right">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                            <a class="btn float-right" onclick="deleteAlert('@Url.Action("DeleteComment", "Stories", new { id = Model.Comments[i].Id})')">
+                            
+                            <a id ="delete-btn" class="btn float-right" style="color:#dc3545; border:1px solid #dc3545" onclick="deleteAlert('@Url.Action("DeleteComment", "Stories", new { id = Model.Comments[i].Id})')">
                                 <i class="fas fa-trash"></i>
                             </a>
                         }
