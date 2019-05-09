@@ -49,23 +49,23 @@ namespace Storyphase.Areas.User.Controllers
             return View(storyList);
         }
 
-        public async Task<IActionResult> List(int id)
+        public async Task<IActionResult> List(string name)
         {
             var storyList = new List<Stories>();
-            if (id == 2)
+            if (name == "private")
             {
                  var userName = _userManager.GetUserName(HttpContext.User);
                  storyList = await _db.Stories.Include(m => m.StoryTypes)
                             .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
                             .Include(m => m.StoryBlocks).Include(m => m.Comments)
-                            .Where(m => m.PrivacyTagId == id && m.Author == userName).ToListAsync();
+                            .Where(m => m.PrivacyTags.Name == name && m.Author == userName).ToListAsync();
             }
             else
             {
                  storyList = await _db.Stories.Include(m => m.StoryTypes)
                             .Include(m => m.SpecialTags).Include(m => m.PrivacyTags)
                             .Include(m => m.StoryBlocks).Include(m => m.Comments)
-                            .Where(m => m.PrivacyTagId == id).ToListAsync();
+                            .Where(m => m.PrivacyTags.Name == name).ToListAsync();
             }
             
             return View(storyList);

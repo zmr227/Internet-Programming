@@ -393,6 +393,5 @@ C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyp
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\User\Views\Stories\DeleteComment.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\User\Views\Home\Privacy.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\Admin\Views\StoriesList\Conflict.g.cshtml.cs
-C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\PrivacyMenu\Default.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Razor\Areas\User\Views\Stories\List.g.cshtml.cs
 C:\Users\可爱的我\Documents\小可爱的IP作业\Internet-Programming\Storyphase\Storyphase\Storyphase\obj\Debug\netcoreapp2.2\Storyphase.csprojAssemblyReference.cache

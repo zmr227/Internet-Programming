@@ -34,10 +34,14 @@
                 });
             }
         });
+        
     });
+
+   
 </script>
 <br />
 <style>
+   
     #carouselControls {
         margin: 30px;
     }
@@ -100,6 +104,7 @@
         width: 100%;
         max-height: 560px !important;
     }
+    
 </style>
 
 @if (User.IsInRole(SD.AdminUser))
@@ -146,13 +151,11 @@
                 <div class="carousel-item @(first?Html.Raw("active"):Html.Raw(""))">
 
                     <div class="card-title">
-                        <input asp-for="@item.Name" diabled class="form-control" />
+                        <input asp-for="@item.Name" style="font-size:larger; font-weight:bold;" diabled class="form-control" />
                     </div>
                     <img class="d-block w-100" src="@item.Image" alt="@item.Name">
 
-                    <div class="tab-content">
-                        <input asp-for="@item.Content" diabled class="form-control" />
-                    </div>
+                    <div contentEditable="true" style="width:100%"  display: inline-block;>@item.Content</div>
                 </div>
                 first = false;
 

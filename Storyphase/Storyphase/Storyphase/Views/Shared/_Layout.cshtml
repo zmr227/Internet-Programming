@@ -55,8 +55,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link text-white-50 dropbtn" asp-area="User" asp-controller="Stories" asp-action="Index">Stories</a>
                             <div class="dropdown-content">
-                                <a asp-controller="Stories" asp-action="List" asp-route-id="1">Public</a>
-                                <a asp-controller="Stories" asp-action="List" asp-route-id="2">Private</a>
+                                <a asp-controller="Stories" asp-action="List" asp-route-name="public">Public</a>
+                                <a asp-controller="Stories" asp-action="List" asp-route-name="private">Private</a>
                                 <a asp-controller="Stories" asp-action="Index" asp-route-id="">See All Stories</a>
                             </div>
 
