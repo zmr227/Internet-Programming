@@ -36,9 +36,10 @@ namespace Storyphase.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var userName = _userManager.GetUserName(HttpContext.User);
+            
             var blocks = _context.StoryBlocks
                           .Include(s => s.Stories)
-                          .Where(s=>s.Stories.PrivacyTags.Equals("public") || s.Stories.Author.Equals(userName))
+                          .Where(s=>s.Stories.PrivacyTags.Name.Equals("public") || s.Stories.Author.Equals(userName))
                           .OrderBy(s=>s.Stories.Title);
 
             return View(await blocks.ToListAsync());

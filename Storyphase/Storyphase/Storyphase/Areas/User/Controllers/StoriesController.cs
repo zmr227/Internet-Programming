@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Storyphase.Data;
 using Storyphase.Extensions;
 using Storyphase.Models;
 using Storyphase.Models.ViewModels;
+using Storyphase.Utility;
 
 namespace Storyphase.Areas.User.Controllers
 {
@@ -130,8 +132,9 @@ namespace Storyphase.Areas.User.Controllers
 
             return View(blocklist);
         }
-
-        // Save new order of StoryBlocks to db
+        
+        // Save new order of StoryBlocks to db 
+        [Authorize(Roles = SD.AdminUser)]
         public JsonResult UpdateItem(string itemIds)
         {
             int count = 1;

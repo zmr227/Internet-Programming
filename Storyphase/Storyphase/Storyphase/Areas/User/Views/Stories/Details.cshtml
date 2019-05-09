@@ -9,7 +9,6 @@
 
 <link rel="stylesheet" href="~/css/comment.css">
 <style>
-   
 </style>
 <br />
 
@@ -86,22 +85,28 @@
             <img src="@Model.Stories.Image" style="width:100%; border-radius:5px; border:1px solid #bbb9b9" class="align-items-center" />
             <br /><br />
             @{
-                bool isInFavorite = false;
-                List<int> lstFavorite = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite");
-                if (lstFavorite != null && lstFavorite.Contains(Model.Stories.Id))
+                if (User.IsInRole(SD.AdminUser) || User.IsInRole(SD.User))
                 {
-                    isInFavorite = true;
 
+
+                    bool isInFavorite = false;
+                    List<int> lstFavorite = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssFavorite");
+                    if (lstFavorite != null && lstFavorite.Contains(Model.Stories.Id))
+                    {
+                        isInFavorite = true;
+
+                    }
+
+                    if (isInFavorite)
+                    {
+                        <button type="submit" value="Remove From Favorite" asp-action="Remove" asp-route-id="@Model.Stories.Id" class="btn btn-danger form-control">Remove From Favorite</button>
+
+                    }
+                    else
+                    {
+                        <button type="submit" value="Add to Favorite" asp-route-id="@Model.Stories.Id" class="btn btn-outline-primary form-control">Add to Favorite</button>
+                    }
                 }
-            }
-            @if (isInFavorite)
-            {
-                <button type="submit" value="Remove From Favorite" asp-action="Remove" asp-route-id="@Model.Stories.Id" class="btn btn-danger form-control">Remove From Favorite</button>
-
-            }
-            else
-            {
-                <button type="submit" value="Add to Favorite" asp-route-id="@Model.Stories.Id" class="btn btn-outline-primary form-control" >Add to Favorite</button>
             }
         </div>
 
@@ -131,8 +136,8 @@
                         </a>
                         @if (User.IsInRole(SD.AdminUser) || (User.IsInRole(SD.User) && User.Identity.Name == Model.Comments[i].UserName))
                         {
-                            
-                            <a id ="delete-btn" class="btn float-right" style="color:#dc3545; border:1px solid #dc3545" onclick="deleteAlert('@Url.Action("DeleteComment", "Stories", new { id = Model.Comments[i].Id})')">
+
+                            <a id="delete-btn" class="btn float-right" style="color:#dc3545; border:1px solid #dc3545" onclick="deleteAlert('@Url.Action("DeleteComment", "Stories", new { id = Model.Comments[i].Id})')">
                                 <i class="fas fa-trash"></i>
                             </a>
                         }

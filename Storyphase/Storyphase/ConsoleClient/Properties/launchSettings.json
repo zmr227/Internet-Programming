@@ -2,7 +2,7 @@
   "profiles": {
     "ConsoleClient": {
       "commandName": "Project",
-      "commandLineArgs": "https://localhost:44307/api/Files /up C:\\Users\\可爱的我\\Downloads\\w3c_home.bmp"
+      "commandLineArgs": "https://localhost:44307/api/Files /up C:\\Users\\可爱的我\\Downloads\\w3c_home123.bmp"
     }
   }
 }
