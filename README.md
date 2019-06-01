@@ -1,10 +1,10 @@
 # Internet Programming
 Course Labs and Project of IP.
 
-## Lab
+## [Labs](Lab)
 14 Labs focusing on different aspect of Web Programming, including Html5, CSS3, JavaScript, JSON, Database, Entity Framework, Asp.net Core, Web API and Web Client.
 
-## Final Project - Storyphase
+## [Final Project - Storyphase](Final%20Project)
 - Built a stories website with Asp.Net Core MVC framework, designed to host a number of stories.
 - Allow users to maintain their own private stories while sharing their awesome stories to the public.
 - Adding comments and favorites are also convenient in this site.
