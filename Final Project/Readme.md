@@ -1,23 +1,16 @@
 # Final Project - Storyphase
 
 ## 1. Introduction
-Storyphase is a ASP.NET Core MVC application platform for users to create and share their stories freely with both authorization and authentication. 
+Storyphase is a ASP.NET Core web application platform for users to create and share their stories freely with both authorization and authentication. <br><br>
+This website supports both manual or automatic iteration for story display and simplifies the timeline management system so that users can change a story's timeline by simply drag and drop. For those public stories, other users will be allowed to comment on and add them to favorites while private stories will be kept only to the author. 
 
 ## 2. Structure
 - Asp.net core MVC - main site
 - Asp.net Web API - web service
-- Web API Client
+- Web API Client (upload files)
 - SQL db storage
 
 ## 3. Functionality
-- It's a website with password protected section using Asp.Net Core MVC.
-- Provides the ability to select and view both publicly available stories, and, with authentication, private stories.
-- Has controls to change a story's timeline (drag and drop blocks), supporting manual or automatic iteration, starting at a story block other than the first, and resuming a suspended story.
-- Ability to comment on and add favorite stories. 
-- Webservice built using Asp.Net Web API with an ability to upload, replace, and delete any of the story blocks or complete stories.
-- Develop Clients for WebService consumption.
-
-## 4. Main Site
 
 - Home Page 
 ![Home](images/home.png)
@@ -50,5 +43,34 @@ Storyphase is a ASP.NET Core MVC application platform for users to create and sh
 
   ![Favorite Story List](images/favorite3.png)
   
-## 4. Install
-This project will require the following 
+## 4. Prerequisites
+- .NET Core 2.2 SDK
+- Visual Studio 2017
+- Commend-line Tools
+  - For Visual Studio, choose the Package Manager Console tools.
+  - For other development environments, choose the .NET Core CLI tools.
+- Entity Framework Core
+  - Powershell
+  ```
+  Install-Package Microsoft.EntityFrameworkCore.SqlServer
+  ```
+  - Console
+  ```
+  dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  ```
+
+## 5. Run
+- Clone or download this repository, navigate to `Internet Programming/Final Project/Storyphase` and open file `Storyphase.sln` with Visual Studio 2017. 
+
+- Create a migration by running the following command:
+  - Powershell:
+    ```
+    Add-Migration InitialCreate
+    Update-Database
+    ```
+  - Console:
+    ```
+    dotnet ef migrations add InitialCreate
+    dotnet ef database update
+    ```
+- Run the program on IIS Express server in Visual Studio.
