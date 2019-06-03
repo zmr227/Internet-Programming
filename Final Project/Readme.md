@@ -14,4 +14,29 @@
 - Webservice built using Asp.Net Web API with an ability to upload, replace, and delete any of the story blocks or complete stories.
 - Develop Clients for WebService consumption.
 
-## 3. Implementation
+## 3. Main Site
+- Home Page 
+![Home](images/home.png)
+
+- Authentication
+<br>![Private](images/private.png)
+
+- Story Display
+![Slideshow](images/slide-1.png)
+
+- Change Timeline
+![Change Sequence](images/slide-2.png)
+
+- Suspend and Resume
+![Suspend](images/slide-3.png)
+
+- Story List
+![List](images/story-list.png)
+
+- Favorites
+![Before Adding](images/favorite1.png)
+
+![Add to Favorite](images/favorite2.png)
+
+![Favorite Story List](images/favorite3.png)
+
