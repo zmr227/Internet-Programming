@@ -1,27 +1,37 @@
 # Final Project - Storyphase
 
-## 1. Structure
+## 1. Introduction
+Storyphase is a ASP.NET Core MVC application platform for users to create and share their stories freely with both authorization and authentication. 
+
+## 2. Structure
 - Asp.net core MVC - main site
 - Asp.net Web API - web service
 - Web API Client
 - SQL db storage
 
-## 2. Functionality
-- Build a website with a password protected section using Asp.Net Core MVC.
+## 3. Functionality
+- It's a website with password protected section using Asp.Net Core MVC.
 - Provides the ability to select and view both publicly available stories, and, with authentication, private stories.
 - Has controls to change a story's timeline (drag and drop blocks), supporting manual or automatic iteration, starting at a story block other than the first, and resuming a suspended story.
 - Ability to comment on and add favorite stories. 
 - Webservice built using Asp.Net Web API with an ability to upload, replace, and delete any of the story blocks or complete stories.
 - Develop Clients for WebService consumption.
 
-## 3. Main Site
+## 4. Main Site
+
 - Home Page 
 ![Home](images/home.png)
 
 - Authentication
 <br>![Private](images/private.png)
 
-- Story Display
+- Selecting Stories
+![Stories](images/story-home.png)
+
+- Story Details and Comments
+![Details](images/comments.png)
+
+- Slideshow Display
 ![Slideshow](images/slide-1.png)
 
 - Change Timeline
@@ -33,10 +43,12 @@
 - Story List
 ![List](images/story-list.png)
 
-- Favorites
+- Add to Favorites
 ![Before Adding](images/favorite1.png)
 
-![Add to Favorite](images/favorite2.png)
+  ![Add to Favorite](images/favorite2.png)
 
-![Favorite Story List](images/favorite3.png)
-
+  ![Favorite Story List](images/favorite3.png)
+  
+## 4. Install
+This project will require the following 
